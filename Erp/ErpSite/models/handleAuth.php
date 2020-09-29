@@ -2,21 +2,19 @@
 
 require 'connDB.php';
 
-function get_user($username) {
+function get_user($username, $password) {
     global $conn;
     try {
-        $sql = "SELECT * FROM users where username = '$username' LIMIT 1 ";
+        $sql = "SELECT * FROM `users` where `username` = '$username' and `password` = '$password' LIMIT 1 ";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            $tp = get_group($username);
             while ($row = $result->fetch_row()) {
                 $currentUser = $row[0];
                 $userGroup = get_group($username);
                 return array($currentUser, $userGroup);
             };
         } else {
-            echo "in get user else";
             return false;
         }
     }
@@ -31,8 +29,7 @@ function get_group($username) {
         $sql = "SELECT * FROM usergroups where username = '$username' LIMIT 1 ";
         $result = $conn->query($sql);
         while ($row = $result->fetch_row()) {
-            echo "in get group else";
-            return $row[1];
+            return $row[2];
         };
 }
     catch(Exception $e) {

@@ -5,8 +5,8 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 
 if ($_POST['username']) {
     require '../models/handleAuth.php';
-    $userArray = get_user($_POST['username']);
-    echo $userArray[0];
+    $userArray = get_user($_POST['username'], $_POST['password']);
+    echo $userArray[1];
 
     switch($userArray[1]) {
         case 'siteAdmin':
