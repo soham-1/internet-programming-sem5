@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Website</title>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <img src="logo.png" class="logo">
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Office</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+        </nav>
+<img src="menu.png">
+    </div>
+
+<div class="row">
+    <div class="col">
+<div class="text-box">
+    <h5>Our Products </h5>
+    <h1><b>Simplicity is Sophistication</b></h1>
+</div>
+<img src="circle.png" class="small-icon1">
+<img src="circle.png" class="small-icon2">
+<img src="square.png" class="small-icon3">
+
+    </div>
+    <div class="col">
+<div class="gallery-box">
+    <img src="pic2.jpg" id="gallery">
+
+    <ul>
+        <li class="btn">01</li>
+        <li class="btn active">02</li>
+        <li class="btn">03</li>
+        <li class="btn">04</li>
+    </ul>
+
+</div>
+    </div>
+</div>
+<img src="circle.png" class="small-icon4">
+<img src="square.png" class="small-icon5">
+</div>
+
+<script>
+    var btn= document.getElementsByClassName("btn");
+    var gallery = document.getElementById("gallery");
+     var images = new Array(
+         "pic1.jpg",
+         "pic2.jpg",
+         "pic3.jpg",
+         "pic4.jpg",
+
+     );
+
+
+    for(let i=0; i<btn.length; i++){
+         btn[i].onclick = function(){
+             gallery.src = images[i];
+             let current = document.getElementsByClassName("active");
+             current[0].className = current[0].className.replace("active","");
+             this.className += " active";
+         };
+     }
+</script>
+</body>
+</html>
