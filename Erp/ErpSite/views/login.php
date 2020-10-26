@@ -7,6 +7,7 @@ if ($_POST) {
     require '../models/handleAuth.php';
     $userArray = get_user($_POST['username'], $_POST['password']);
     if ($userArray) {
+        $_SESSION['login_user'] = $_POST['username'];
         switch($userArray[1]) {
             case 'admin':
                 {
