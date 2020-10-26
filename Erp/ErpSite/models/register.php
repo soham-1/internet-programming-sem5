@@ -1,34 +1,20 @@
 <?php
 
-require_once('connDB.php');
+require 'connDB.php';
 
 function register($username, $password, $email, $group) {
     global $conn;
     try {
-        $usersql = "INSERT INTO `users`(`username`, `password`, `email`) VALUES ('$username', '$password', '$email')";
-        if (check_group($group)) {
-            if ($conn->query($usersql)) {
-                $groupsql = "INSERT INTO `usergroups`(`username`, `groups`) VALUES ('$username', '$group')";
-                $result = $conn->query($groupsql);
-                // $result->execute();
-                return array(200, "account created successfully");
-            }
-        }
+        $groupsql = "SELECT `id` FROM `groups` where 1";
+        // $result = mysqli_query($conn, $groupsql);
+        $result = $conn->query($groupsql);
+        $row = $result->fetch_row();
+        $usersql = "INSERT INTO `user`(`username`, `password`, `email`, `groups`) VALUES ('$username', '$password', '$email', 1)";
+        // $usersql = "SELECT `id` FROM `groups` where `group_name` = `$group`";
+        $result = $conn->query($usersql);          
+        return array(200, "account created successfully");
     } catch(Execption $e) {
         return array(500, $e->getMessage());
-    }
-}
-
-function check_group($group) {
-    global $conn;
-    $sql = "SELECT * FROM `groups` WHERE name = '$group' LIMIT 1";
-    $result = $conn->query($sql);
-    try {
-        if ($result->num_rows > 0) {
-            return true;
-        }
-    } catch(Exception $e) {
-        return false;
     }
 }
 
