@@ -19,36 +19,144 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </head>
+  <style>
+
+.topnav {
+  overflow: hidden;
+  background-color: rgb(25,39,59);
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  overflow: hidden;
+  float:left;
+}
+/* dropdown css */
+ .dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;} /* Important for vertical align on mobile phones
+  margin: 0; /* Important for vertical align on mobile phones
+}
+
+/* Add a red background color to navbar links on hover*/
+
+
+
+/*  Dropdown content (hidden by default)*/
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+    </style>
+
   <body>
+  <div class="topnav">
+  <div class="topnav-right">
+    <a href="#search">Search</a>
+    <div class="dropdown">
+    <button class="dropbtn"><i class="fas fa-user"></i>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
+      <a href="#"><i class="fas fa-cog"></i>Settings</a>
+      <br>
+      <a href="#"><i class="fas fa-power-off"></i>Logout</a>
+    </div>
+  </div>
+  <a href="#search">Search</a>
+  </div>
+</div>
+
     <div class="btn">
       <span class="fas fa-bars"></span>
     </div>
 <nav class="sidebar">
       <div class="text">
-Side Menu</div>
+LOCCO ERP</div>
 <ul>
 <li class="active"><a href="#">Dashboard</a></li>
 <li>
-          <a href="#" class="feat-btn">Features
+          <a href="#" class="feat-btn">Product
             <span class="fas fa-caret-down first"></span>
           </a>
           <ul class="feat-show">
-<li><a href="#">Pages</a></li>
-<li><a href="#">Elements</a></li>
+<li><a href="#">Add Product</a></li>
+<li><a href="#">View Product</a></li>
 </ul>
 </li>
 <li>
-          <a href="#" class="serv-btn">Services
+          <a href="#" class="serv-btn">Payment
             <span class="fas fa-caret-down second"></span>
           </a>
           <ul class="serv-show">
-<li><a href="#">App Design</a></li>
-<li><a href="#">Web Design</a></li>
+<li><a href="#">Pending Payments</a></li>
+<li><a href="#">Payment Report</a></li>
 </ul>
 </li>
-<li><a href="#">Portfolio</a></li>
-<li><a href="#">Overview</a></li>
-<li><a href="#">Shortcuts</a></li>
+<li><a href="#">Inventory Management</a></li>
+<li><a href="#">Today's Booking</a></li>
+<li><a href="#">Sales Report</a></li>
 <li><a href="#">Feedback</a></li>
 </ul>
 </nav>
@@ -57,6 +165,14 @@ Side Menu</div>
     <p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a></p>
 
 </div>
+<script>
+      $(document).ready(function(){
+        $('.btn').click(function(){
+          $('.items').toggleClass("show");
+          $('ul li').toggleClass("hide");
+        });
+      });
+    </script>
 <script>
     $('.btn').click(function(){
       $(this).toggleClass("click");
