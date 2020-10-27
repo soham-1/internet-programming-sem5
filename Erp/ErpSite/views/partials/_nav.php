@@ -11,7 +11,7 @@
 
   .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(12,19,29);
   }
 
   .topnav a {
@@ -29,10 +29,6 @@
     color: black;
   }
 
-  .topnav a.active {
-    background-color: #4c5baf;
-    color: white;
-  }
 
   .topnav .icon {
     display: none;
