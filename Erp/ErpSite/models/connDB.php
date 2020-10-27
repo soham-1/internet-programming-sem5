@@ -3,7 +3,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$db = "erpdb";
+$db = "ErpDb";
 
 $conn = new mysqli($host, $username, $password, $db);
 
