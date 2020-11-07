@@ -400,7 +400,7 @@ body {
 ?>
 <div class="login-box">
     <h2>Register</h2>
-    <form action="/php_projects/internet-programming-sem5/Erp/ErpSite/views/signup.php" method="POST">
+    <form action="signup.php" method="POST">
     <div class="user-box">
         <input type="text" name="username" id="username" required>
         <label>Username</label>
