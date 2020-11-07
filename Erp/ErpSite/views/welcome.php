@@ -121,7 +121,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
       <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
       <a href="#"><i class="fas fa-cog"></i>Settings</a>
       <br>
-      <a href="#"><i class="fas fa-power-off"></i>Logout</a>
+      <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
   <a href="#search">Search</a>
