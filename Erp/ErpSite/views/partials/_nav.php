@@ -60,21 +60,26 @@
 </head>
 <body>
 <?php
-
+$dir = '/' . explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to ErpSite folder
+$basedir = '/' . explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
   $loggedin = true;
 }
 else{
   $loggedin = false;
 }
+$index_url = $dir . "/index.php";
+$login_url = $dir . "/login.php";
+$signup_url = $dir . "/signup.php";
+$logout_url = $dir . "/logout.php";
 echo'
 <div class="topnav" id="myTopnav">
-  <a href="/php_projects/internet-programming-sem5/Erp/ErpSite/views/index.php" class="active">Home</a>';
+  <a href="' . $index_url . '" class="active">Home</a>';
   if(!$loggedin){
-  echo '<a href="/php_projects/internet-programming-sem5/Erp/ErpSite/views/login.php">Login</a>
-  <a href="/php_projects/internet-programming-sem5/Erp/ErpSite/views/signup.php">Signup</a>';}
+  echo '<a href="' . $login_url . '">Login</a>
+  <a href="' . $signup_url . '">signup</a>';}
   if($loggedin){
-  echo '<a href="/php_projects/internet-programming-sem5/Erp/ErpSite/views/logout.php">Logout</a>';}
+  echo '<a href="' . $logout_url . '">Logout</a>';}
   echo '<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>

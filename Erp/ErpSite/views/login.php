@@ -249,7 +249,7 @@ body {
 ?>
      <div class="login-box">
     <h2>Login</h2>
-    <form action="/php_projects/internet-programming-sem5/Erp/ErpSite/views/login.php" method="post">
+    <form action="login.php" method="post">
     <div class="user-box">
 
         <input type="text" name="username" id="username">
