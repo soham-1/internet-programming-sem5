@@ -110,9 +110,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     </style>
 
   <body>
+  <?php
+  if(implode($_SESSION['group_name'])=='shop'){
+    echo'
+
   <div class="topnav">
   <div class="topnav-right">
-    <a href="#search">Search</a>
+    <a href="shop_info.php">Shop info</a>
     <div class="dropdown">
     <button class="dropbtn"><i class="fas fa-user"></i>
       <i class="fa fa-caret-down"></i>
@@ -155,16 +159,120 @@ LOCCO ERP</div>
 </ul>
 </li>
 <li><a href="#">Inventory Management</a></li>
-<li><a href="#">Today's Booking</a></li>
+<li><a href="#">Todays Booking</a></li>
 <li><a href="#">Sales Report</a></li>
 <li><a href="#">Feedback</a></li>
 </ul>
-</nav>
-    <div class="content">
-    <h4 class="alert-heading">Welcome!  <?php echo $_SESSION['username'] ?> </h4>
-    <p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a></p>
+</nav>';}
+elseif(implode($_SESSION['group_name'])=='customer'){
+  echo'
 
+  <div class="topnav">
+  <div class="topnav-right">
+    <a href="shop_info.php">Customer info</a>
+    <div class="dropdown">
+    <button class="dropbtn"><i class="fas fa-user"></i>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
+      <a href="#"><i class="fas fa-cog"></i>Settings</a>
+      <br>
+      <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
+    </div>
+  </div>
+  <a href="#search">Search</a>
+  </div>
 </div>
+
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
+<nav class="sidebar">
+      <div class="text">
+LOCCO ERP</div>
+<ul>
+<li class="active"><a href="#">My Orders</a></li>
+
+<li>
+          <a href="#" class="serv-btn">Payment
+            <span class="fas fa-caret-down second"></span>
+          </a>
+          <ul class="serv-show">
+<li><a href="#">Pending Payments</a></li>
+<li><a href="#">Payment Report</a></li>
+</ul>
+</li>
+<li><a href="#"></a></li>
+<li><a href="#">Todays Booking</a></li>
+<li><a href="#">Shop by Category</a></li>
+<li><a href="#">Locate Shops</a></li>
+<li><a href="#">Feedback</a></li>
+</ul>
+</nav>';}
+else{
+  echo'
+  <div class="topnav">
+
+  <div class="topnav-right">
+    <a href="shop_info.php">Admin info</a>
+    <div class="dropdown">
+    <button class="dropbtn"><i class="fas fa-user"></i>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
+      <a href="#"><i class="fas fa-cog"></i>Settings</a>
+      <br>
+      <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
+    </div>
+  </div>
+  <a href="#search">Search</a>
+  </div>
+</div>
+
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
+<nav class="sidebar">
+      <div class="text">
+LOCCO ERP</div>
+<ul>
+<li class="active"><a href="#">Dashboard</a></li>
+<li>
+          <a href="#" class="feat-btn">Product
+            <span class="fas fa-caret-down first"></span>
+          </a>
+          <ul class="feat-show">
+<li><a href="#">Add Product</a></li>
+<li><a href="#">View Product</a></li>
+</ul>
+</li>
+<li>
+          <a href="#" class="serv-btn">Payment
+            <span class="fas fa-caret-down second"></span>
+          </a>
+          <ul class="serv-show">
+<li><a href="#">Pending Payments</a></li>
+<li><a href="#">Payment Report</a></li>
+</ul>
+</li>
+<li><a href="#">Inventory Management</a></li>
+<li><a href="#">Todays Booking</a></li>
+<li><a href="#">Sales Report</a></li>
+<li><a href="#">Feedback</a></li>
+</ul>
+</nav>';}
+
+  ?>
+<p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a>
+<?php
+echo $_SESSION['username'];
+echo $_SESSION['group_id'];
+echo $_SESSION['user_id'];
+echo implode($_SESSION['group_name']);
+?></p>
+
 <script>
       $(document).ready(function(){
         $('.btn').click(function(){
