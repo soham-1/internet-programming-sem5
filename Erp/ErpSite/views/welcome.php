@@ -118,7 +118,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
+      <a href="profile.php"><i class="fas fa-user-circle"></i>My Profile</a>
       <a href="#"><i class="fas fa-cog"></i>Settings</a>
       <br>
       <a href="#"><i class="fas fa-power-off"></i>Logout</a>
@@ -129,7 +129,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
 </div>
 
     <div class="btn">
-      <span class="fas fa-bars"></span>
+      <span class="fas fa-bars" style="margin-left: 0px;"></span>
     </div>
 <nav class="sidebar">
       <div class="text">
