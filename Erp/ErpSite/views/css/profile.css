@@ -16,34 +16,33 @@ body{
     margin: 50px 0 0 100px;
 }
 .side-section{
-    margin-left: 50px;
+    z-index: 0;
+    padding: 0 50px 0 50px;
     flex-direction: column;
 }
 .form-section{
     flex-direction: column;
     position: relative;
+    top: 100px;
 }
 .details{
     position: relative;
-    top: 100px;
-    left: 50px;
 }
 .header{
     position: relative;
     text-align: left;
     font-size: 25px;
-    width: 200%;
+    width: 100%;
     border-bottom: 2px solid black;
 }
 .rounded-img{
-    padding: 0 10px 0 10px;
     height: 200px;
     width: 200px;
     border-radius: 50%;
 }
 label{
     position: relative;
-    width: 50%;
+    width: 25%;
     height: 35px;
 }
 .values{
@@ -61,7 +60,6 @@ input[type="text"], input[type="password"]{
     width: 200px;
 }
 input[type="text"]:focus, input[type="email"]:focus{
-    /* box-shadow: 0px 1px 3px 2px rgba(1,1,1,0.9); */
     border-bottom: 3px solid black;
     font-size: 11px;
 }
@@ -69,6 +67,12 @@ input[type="text"]:focus, input[type="email"]:focus{
     left: 20px;
 }
 label#email{
-    width: auto;
+    width: max-content;
     left: 0px;
+}
+#form-btn{
+    position: relative;
+    float: right;
+    bottom: 0;
+    margin-top: 50px;
 }
