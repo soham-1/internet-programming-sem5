@@ -77,7 +77,7 @@ echo'
   <a href="' . $index_url . '" class="active">Home</a>';
   if(!$loggedin){
   echo '<a href="' . $login_url . '">Login</a>
-  <a href="' . $signup_url . '">signup</a>';}
+  <a href="' . $signup_url . '">Signup</a>';}
   if($loggedin){
   echo '<a href="' . $logout_url . '">Logout</a>';}
   echo '<a href="javascript:void(0);" class="icon" onclick="myFunction()">
