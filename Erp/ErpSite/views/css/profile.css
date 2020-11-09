@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    min-height: 100vh;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background: #fff;
+    margin: 50px 0 0 100px;
+}
+.side-section{
+    margin-left: 50px;
+    flex-direction: column;
+}
+.form-section{
+    flex-direction: column;
+    position: relative;
+}
+.details{
+    position: relative;
+    top: 100px;
+    left: 50px;
+}
+.header{
+    position: relative;
+    text-align: left;
+    font-size: 25px;
+    width: 200%;
+    border-bottom: 2px solid black;
+}
+.rounded-img{
+    padding: 0 10px 0 10px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+label{
+    position: relative;
+    width: 50%;
+    height: 35px;
+}
+.values{
+    position: relative;
+    left: 70px;
+}
+.detail-field{
+    margin-top: 20px;
+    height: 35px;
+}
+input[type="text"], input[type="password"]{
+    border: 0 ;
+    border-bottom: 1px solid black;
+    font-size: 14px;
+    width: 200px;
+}
+input[type="text"]:focus, input[type="email"]:focus{
+    /* box-shadow: 0px 1px 3px 2px rgba(1,1,1,0.9); */
+    border-bottom: 3px solid black;
+    font-size: 11px;
+}
+#email{
+    left: 20px;
+}
+label#email{
+    width: auto;
+    left: 0px;
+}
