@@ -17,10 +17,18 @@ $exists = false;
               if(password_verify($password,$row['password'])){
                 $login = true;
                 session_start();
+                // $sql3 = "Select groups from user where username=".$username;
+                // $group_id = mysqli_query($conn, $sql3);
+                // $groupid =mysqli_fetch_array($group_id);
+                $sql1 = "SELECT group_name from groups WHERE id=".$row['groups'];
+                $result1 = mysqli_query($conn, $sql1);
+                $name = mysqli_fetch_assoc($result1);
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['group_id'] = $row['groups'];
+                $_SESSION['group_name'] = $name;
+
                 header("location: welcome.php");
               }
               else{
