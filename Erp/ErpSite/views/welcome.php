@@ -145,7 +145,7 @@ LOCCO ERP</div>
             <span class="fas fa-caret-down first"></span>
           </a>
           <ul class="feat-show">
-<li><a href="#">Add Product</a></li>
+<li><a href="add_product.php">Add Product</a></li>
 <li><a href="#">View Product</a></li>
 </ul>
 </li>
