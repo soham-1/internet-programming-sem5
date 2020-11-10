@@ -1,4 +1,5 @@
 <?php
+//this is a DOMComment
 $login = false;
 $showerror = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
