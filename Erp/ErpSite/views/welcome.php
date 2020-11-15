@@ -6,6 +6,8 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
   exit;
 }
 
+$dir = explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to user folder
+$basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 ?>
 
 <!DOCTYPE html>
@@ -175,7 +177,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"><i class="fas fa-user-circle"></i>My Profile</a>
+      <a href="cust_profile.php"><i class="fas fa-user-circle"></i>My Profile</a>
       <a href="#"><i class="fas fa-cog"></i>Settings</a>
       <br>
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
