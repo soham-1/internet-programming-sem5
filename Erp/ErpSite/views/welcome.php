@@ -138,8 +138,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
       <span class="fas fa-bars" style="margin-left: 0px;"></span>
     </div>
 <nav class="sidebar">
-      <div class="text">
-LOCCO ERP</div>
+<a href="welcome.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="#">Dashboard</a></li>
 <li>
@@ -160,7 +159,7 @@ LOCCO ERP</div>
 <li><a href="#">Payment Report</a></li>
 </ul>
 </li>
-<li><a href="#">Inventory Management</a></li>
+<li><a href="inventory.php">Inventory Management</a></li>
 <li><a href="#">Todays Booking</a></li>
 <li><a href="#">Sales Report</a></li>
 <li><a href="#">Feedback</a></li>
@@ -191,8 +190,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
       <span class="fas fa-bars"></span>
     </div>
 <nav class="sidebar">
-      <div class="text">
-LOCCO ERP</div>
+<a href="welcome.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="#">My Orders</a></li>
 
@@ -237,8 +235,7 @@ else{
       <span class="fas fa-bars"></span>
     </div>
 <nav class="sidebar">
-      <div class="text">
-LOCCO ERP</div>
+<a href="welcome.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="#">Dashboard</a></li>
 <li>

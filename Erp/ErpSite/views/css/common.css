@@ -1,3 +1,8 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 @media only screen and (max-width: 600px) {
     .col-sm-1 {width: 8.33%;}
     .col-sm-2 {width: 16.66%;}
@@ -85,4 +90,35 @@
 }
 .btn-success:active{
   background-color:  #249e2e;
+}
+.table {
+  display: block;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border-collapse: collapse;
+  font-size: 18px;
+}
+.table-header{
+  font-size: large;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+  padding: 3px 0 3px 0;
+}
+tbody, thead{
+  display: table;
+  width: 100%;
+  font-size: 1rem;
+}
+thead{
+  color: black;
+  font-weight: bold;
+}
+td{
+  width: 20%;
+  word-wrap: normal;
+}
+tr:nth-child(even){
+  background-color: #dee2e6;
 }
