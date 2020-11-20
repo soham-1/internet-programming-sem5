@@ -46,8 +46,7 @@ html, body{
     .col-lg-10 {width: 83.33%;}
     .col-lg-11 {width: 91.66%;}
     .col-lg-12 {width: 100%;}
-  }
-
+}
 .row{
   display: flex;
   flex-direction: row;
@@ -80,6 +79,14 @@ html, body{
   background-color: #007bff;
   border-color: #007bff;
 }
+.btn-outline-pink{
+  color: #ff3d00;
+  background-color: #fff;
+  border-color: #ff3d00;
+}
+.btn-outline-pink:active{
+  border-color: #ff3d00;
+}
 .btn-primary:active{
   background-color:  #1100ff;
 }
@@ -91,7 +98,7 @@ html, body{
 .btn-success:active{
   background-color:  #249e2e;
 }
-.table {
+/* .table {
   display: block;
   align-items: center;
   width: 100%;
@@ -121,4 +128,7 @@ td{
 }
 tr:nth-child(even){
   background-color: #dee2e6;
+} */
+td{
+  text-align: center;
 }
