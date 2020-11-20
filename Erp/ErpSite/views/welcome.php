@@ -146,8 +146,8 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
             <span class="fas fa-caret-down first"></span>
           </a>
           <ul class="feat-show">
-<li><a href="add_product.php">Add Product</a></li>
-<li><a href="view_product.php">View Product</a></li>
+<li><a href="add_inventory.php">Add Product</a></li>
+<li><a href="#">View Product</a></li>
 </ul>
 </li>
 <li>
@@ -205,7 +205,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 </li>
 <li><a href="#"></a></li>
 <li><a href="#">Todays Booking</a></li>
-<li><a href="#">Shop by Category</a></li>
+<li><a href="shopping.php">Shop by Category</a></li>
 <li><a href="#">Locate Shops</a></li>
 <li><a href="#">Feedback</a></li>
 </ul>
