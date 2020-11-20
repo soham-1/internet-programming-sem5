@@ -147,7 +147,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
           </a>
           <ul class="feat-show">
 <li><a href="add_product.php">Add Product</a></li>
-<li><a href="#">View Product</a></li>
+<li><a href="view_product.php">View Product</a></li>
 </ul>
 </li>
 <li>
@@ -264,13 +264,8 @@ else{
 </nav>';}
 
   ?>
-<p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a>
-<?php
-echo $_SESSION['username'];
-echo $_SESSION['group_id'];
-echo $_SESSION['user_id'];
-echo implode($_SESSION['group_name']);
-?></p>
+<!-- <p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a> -->
+
 
 <script>
       $(document).ready(function(){

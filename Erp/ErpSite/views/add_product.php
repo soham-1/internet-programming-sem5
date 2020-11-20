@@ -7,20 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 $prod_name = $_POST['prod_name'];
 $category = $_POST['category'];
 $description = $_POST['description'];
-$price = $_SESSION['price'];
-$description = $_POST['description'];
-$msg = "";
-
-
-
-    $filename = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
-    $folder = "image/".$filename;
-
-
-    // Now let's move the uploaded image into the folder: image
-
-$sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description`) VALUES ('$prod_name', '$category', '$filename','$price','$description')";
+$price = $_POST['price'];
+if(isset($_POST['image']))
+    {
+        $_useImagePost = 1;
+        $_imagePost = file_get_contents($_FILES['image']['tmp_name']);
+    }
+$sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description`) VALUES ('$prod_name', '$category', '$_imagePost','$price','$description')";
     $result = mysqli_query($conn,$sql);
     if ($result){
             $showalert = true;
@@ -28,11 +21,7 @@ $sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description
     else{
         $showerror = 'Cannot insert';
     }
-    if (move_uploaded_file($tempname, $folder))  {
-        $msg = "Image uploaded successfully";
-    }else{
-        $msg = "Failed to upload image";
-  }
+
 
 }
 ?>
@@ -48,7 +37,7 @@ $sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description
 
 <div class=outer-container>
     <div class="container">
- 
+
       <header>Product Form</header>
 
 <div class="form-outer">
