@@ -14,8 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $res = $conn->query("select prod_id from inventory where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
     if ($res->num_rows > 0) {
       $conn->query("update inventory set price='{$price}', description='{$description}', qty='{$qty}', discount='{$discount}' where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
+      echo '<script>alert("product updated")</script>';
     } else {
       $conn->query("insert into inventory(shop_id, prod_id, price, discount, qty, description) values('{$shop_id}', '{$prod_id}', '{$price}', '{$discount}', '{$qty}', '{$description}') ");
+      echo '<script>alert("product added")</script>';
+      
     }
 }
 ?>
