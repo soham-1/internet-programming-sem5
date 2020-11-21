@@ -17,7 +17,7 @@ html, body{
     .col-sm-11 {width: 91.66%;}
     .col-sm-12 {width: 100%;}
   }
-  
+
 @media only screen and (min-width: 601px) {
     .col-md-1 {width: 8.33%;}
     .col-md-2 {width: 16.66%;}
@@ -32,7 +32,7 @@ html, body{
     .col-md-11 {width: 91.66%;}
     .col-md-12 {width: 100%;}
   }
-  
+
 @media only screen and (min-width: 768px) {
     .col-lg-1 {width: 8.33%;}
     .col-lg-2 {width: 16.66%;}
@@ -107,6 +107,7 @@ html, body{
   background-color: transparent;
   border-collapse: collapse;
   font-size: 18px;
+  margin-top: 10px;
 }
 .table-header{
   font-size: large;
