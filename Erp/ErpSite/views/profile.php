@@ -126,7 +126,7 @@ $email; $picture; $address; $phone_no; $shop;
                         $count += 1;
                     }
                 ?>
-                <button class="btn btn-success" id="form-btn" type="submit">update</button>
+                <button class="bsbtn btn-success" id="form-btn" type="submit">update</button>
             </form>
         </div>
 
@@ -173,7 +173,7 @@ $email; $picture; $address; $phone_no; $shop;
                         <input type="text" class="detail-field values" id="pincode" name="pincode" value="<?php echo $address[5]; ?>" required >
                     </div>
                 </div>
-                <button class="btn btn-success" id="form-btn" type="submit">save</button>
+                <button class="bsbtn btn-success" id="form-btn" type="submit">save</button>
             </form>
         </div>
     </div>
