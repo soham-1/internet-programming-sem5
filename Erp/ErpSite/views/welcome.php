@@ -147,7 +147,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
           </a>
           <ul class="feat-show">
 <li><a href="add_inventory.php">Add Product</a></li>
-<li><a href="#">View Product</a></li>
+<li><a href="view_product.php">View Product</a></li>
 </ul>
 </li>
 <li>
