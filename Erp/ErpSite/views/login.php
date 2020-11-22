@@ -29,6 +29,7 @@ $exists = false;
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['group_id'] = $row['groups'];
                 $_SESSION['group_name'] = $name;
+                $_SESSION['cart'] = 0;
 
                 header("location: welcome.php");
               }

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';
 ?>
 
-<head>    
+<head>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/inventory.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
@@ -18,7 +18,7 @@
 $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' ")->fetch_row();
 $products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' ");
 
-if (isset($_GET)) {
+if (count($_GET)>0) {
     $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
 }
 ?>
@@ -30,12 +30,12 @@ if (isset($_GET)) {
     <table id="table_id" class="display">
         <thead>
             <tr>
-                <th>product</th>
-                <th>description</th>
-                <th>category</th>
-                <th>qty</th>
-                <th>discount</th>
-                <th>actions</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Qty</th>
+                <th>Discount</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -85,10 +85,10 @@ if (isset($_GET)) {
             var discount = id + "discount";
             var save = id + "save";
             var cancel = id + "cancel"
-            document.getElementById(desc).style.visibility = "visible"; 
-            document.getElementById(qty).style.visibility = "visible"; 
-            document.getElementById(discount).style.visibility = "visible"; 
-            document.getElementById(save).style.visibility = "visible"; 
+            document.getElementById(desc).style.visibility = "visible";
+            document.getElementById(qty).style.visibility = "visible";
+            document.getElementById(discount).style.visibility = "visible";
+            document.getElementById(save).style.visibility = "visible";
             document.getElementById(cancel).style.visibility = "visible";
         });
         $('.cancel-button').click(function() {
@@ -98,9 +98,9 @@ if (isset($_GET)) {
             var discount = id + "discount";
             var save = id + "save";
             var cancel = id + "cancel"
-            document.getElementById(desc).style.visibility = "hidden"; 
-            document.getElementById(qty).style.visibility = "hidden"; 
-            document.getElementById(discount).style.visibility = "hidden"; 
+            document.getElementById(desc).style.visibility = "hidden";
+            document.getElementById(qty).style.visibility = "hidden";
+            document.getElementById(discount).style.visibility = "hidden";
             document.getElementById(save).style.visibility = "hidden";
             document.getElementById(cancel).style.visibility = "hidden";
         });

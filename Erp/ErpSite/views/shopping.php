@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';
 ?>
 
-<head>    
+<head>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/shopping.css">
     <script src="js/shopping.js"></script>
@@ -19,7 +19,7 @@
     SELECT * FROM products
     WHERE product_id IN
     (SELECT MIN(product_id) FROM products GROUP BY category)");
-    
+
     $clothes = $conn->query("select * from products where category='clothes' ");
     $daily_items = $conn->query("select * from products where category='daily' ");
 ?>
@@ -28,7 +28,7 @@
 <div class="outer-container">
     <div class="row" id="popular">
     <!-- <i class="fas fa-angle-left angle"></i> -->
-    <button class="prev" disabled>prev</button> 
+    <button class="prev" disabled>prev</button>
     <?php
     while($row=$products->fetch_assoc()) {
         if (isset($row['image'])) {
@@ -44,7 +44,7 @@
               ';
         } else {
             echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                <a href="shop_prod_view.php?product_id='. $row['product_id'] . '&shop_id='. $row['shop_id']. '">
                 <img src="css/defaultC.png" alt="image not available" style="width:100%">
                 </a>
                 <div class="text-container">
@@ -101,7 +101,7 @@
               <!-- <span class="angle"><i class="fas fa-angle-right"></i></span> -->
               <button class="next" >next</button>
     </div><br>
-    
+
     <a href="category_list.php?category=clothes"><h2>clothes</h2></a>
     <div class="row">
         <?php
@@ -154,7 +154,7 @@
     let num_slides;
     let element = $('#popular .card');
     // let element = $('.row .card');
-    
+
     for (i=0; i<element.length; i++) {
         element[i].style.display = "none";
     }

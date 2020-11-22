@@ -182,7 +182,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
-  <a href="#search">Search</a>
+  <a href="cart.php"><i class="fas fa-shopping-cart"></i>Cart<sup>'.$_SESSION['cart'].'</sup></a>
   </div>
 </div>
 
