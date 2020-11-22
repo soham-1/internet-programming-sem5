@@ -9,6 +9,7 @@
 
 <head>
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/datatable.css">
     <link rel="stylesheet" href="css/inventory.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
@@ -30,7 +31,8 @@ $products = $conn->query("select * from products ");
 <div class="outer-container">
 
     <div class="container col-lg-10 col-md-10 col-sm-12">
-        <table class="table" id="prod_list">
+    <div class="table-responsive mb-4">
+        <table class="table table-striped table-bordered table-hover" id="prod_list">
         <thead>
             <tr class="thead">
                 <th scope="col" class="table-header">Name</td>
@@ -64,6 +66,7 @@ $products = $conn->query("select * from products ");
             ?>
             </tbody>
         </table>
+        </div>
     </div>
 
 </div>
