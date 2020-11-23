@@ -18,7 +18,7 @@
 $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' ")->fetch_row();
 $products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' ");
 
-if (isset($_GET)) {
+if (count($_GET)>0) {
     $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
 }
 ?>

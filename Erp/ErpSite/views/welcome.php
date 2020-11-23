@@ -161,8 +161,8 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 </li>
 <li><a href="inventory.php">Inventory Management</a></li>
 <li><a href="#">Todays Booking</a></li>
-<li><a href="#">Sales Report</a></li>
-<li><a href="#">Feedback</a></li>
+<li><a href="report.php">Sales Report</a></li>
+<li><a href="contact_us.php">Feedback</a></li>
 </ul>
 </nav>';}
 elseif(implode($_SESSION['group_name'])=='customer'){
@@ -207,7 +207,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 <li><a href="#">Todays Booking</a></li>
 <li><a href="shopping.php">Shop by Category</a></li>
 <li><a href="#">Locate Shops</a></li>
-<li><a href="#">Feedback</a></li>
+<li><a href="contact_us.php">Feedback</a></li>
 </ul>
 </nav>';}
 else{
