@@ -161,7 +161,15 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 </li>
 <li><a href="inventory.php">Inventory Management</a></li>
 <li><a href="#">Todays Booking</a></li>
-<li><a href="report.php">Sales Report</a></li>
+<li>
+  <a href="#" class="serv-btn">Sales Report
+    <span class="fas fa-caret-down second"></span>
+  </a>
+  <ul class="serv-show">
+    <li><a href="report.php?type=category">category wise</a></li>
+    <li><a href="report.php?type=sale">sales</a></li>
+  </ul>
+</li>
 <li><a href="contact_us.php">Feedback</a></li>
 </ul>
 </nav>';}

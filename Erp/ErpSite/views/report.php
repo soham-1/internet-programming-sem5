@@ -4,23 +4,30 @@
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';
-    if (isset($_GET['shop_id'])) {
-        $result = $conn->query("select shop_id, prod_id from inventory")->fetch_all();
-        $result = $conn->query("SELECT * FROM payments where shop_id='{$_GET['shop_id']}' ORDER BY time");
-        // $dataPoints = array();
-        // foreach($result as $row){
-        //         array_push($dataPoints, array("x"=> $row[0], "y"=> $row[1]));
-        //     }
-        //     $dataPoints[4]['x'] = 2;
-            $dataPoints = array(
-                array("y" => 25, "label" => "Sunday"),
-                array("y" => 15, "label" => "Monday"),
-                array("y" => 25, "label" => "Tuesday"),
-                array("y" => 5, "label" => "Wednesday"),
-                array("y" => 10, "label" => "Friday"),
-                array("y" => 0, "label" => "Thursday"),
-                array("y" => 20, "label" => "Saturday")
-            );
+    if (isset($_GET['type'])) {
+        $dataPoints = array();
+        $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' limit 1")->fetch_row()[0];
+        if ($_GET['type']=='sale') {
+            if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+                $result = $conn->query("SELECT amount, pay_date FROM payments where shop_id='{$shop_id}' and pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}' ORDER BY pay_date");
+            } else {
+                $result = $conn->query("SELECT amount, pay_date FROM payments where shop_id='{$shop_id}' ORDER BY pay_date");
+            }
+            while($row=$result->fetch_assoc()) {
+                array_push($dataPoints, array("y"=> $row["amount"], "label" => $row["pay_date"]));
+            }
+        } else if ($_GET['type']=='category') {
+            $sql = "select i.price, p.category, pd.qty from payments py inner join payment_details pd on py.payment_id=pd.payment_id inner join products p on pd.prod_id=p.product_id inner join inventory i on p.product_id=i.prod_id where py.shop_id='{$shop_id}'";
+            if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+                $sql .= " and py.pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}'";
+                $result = $conn->query($sql);
+            } else {
+                $result = $conn->query($sql);
+            }
+            while($row=$result->fetch_assoc()) {
+                array_push($dataPoints, array("y"=>($row["price"] * $row['qty']), "label" => $row["category"]));
+            }
+        }
     }
 ?>
 <head>
@@ -32,15 +39,27 @@
 </head>
 <script>
 window.onload = function () {
+const queryString = window.location.search;
+console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+const type = urlParams.get('type');
+let diagram, title;
+if (type=="sale") {
+    diagram="line";
+    title = "sales graph";
+} else if (type=="category") {
+    diagram="pie";
+    title = "category distribution";
+}
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	exportEnabled: true,
 	theme: "light1", // "light1", "light2", "dark1", "dark2"
 	title:{
-		text: "PHP Column Chart from Database"
+		text: title
 	},
 	data: [{
-		type: "line", //change type to bar, line, area, pie, etc  
+		type: diagram, //change type to bar, line, area, pie, etc  
 		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
@@ -48,19 +67,18 @@ chart.render();
  
 }
 </script>
-<?php
-$var = "test";
-    // if (count($_POST)>0) {
-    //     $conn->query("insert into feedback(user_id, first_name, last_name, recovery_email, ratings, message) values('{$_SESSION['user_id']}','{$_POST['first_name']}','{$_POST['last_name']}','{$_POST['email']}','{$_POST['rating']}','{$_POST['message']}') ");
-    //     echo '<script>alert("thanks for the feedback")</script>';
-    // }
-?>
 
 <body>
     <div class="outer-container">
         <div class="container col-lg-10 col-md-10 col-sm-12">
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+            <form action="#" method="get">
+                <?php echo '<input type="hidden" name="type" value="' . $_GET['type'] .'">'; ?>
+                <input type="date" name="start_date" id="start_date">
+                <input type="date" name="end_date" id="end_date">
+                <button type="submit">go</button>
+            </form>
         </div>
     </div>
 </body>
