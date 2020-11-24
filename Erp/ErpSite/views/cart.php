@@ -17,19 +17,15 @@
 <?php
 $cust_id = $_SESSION['user_id'];
 $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
-$row = $cart_items->fetch_assoc();
-$prod = $conn->query("select * from inventory where prod_id='{$row['prod_id']}' AND shop_id='{$row['shop_id']}' ");
-$row = $prod->fetch_assoc();
-$prod_view = $conn->query("select * from products where product_id='{$_row['prod_id']}'");
-$prod_img = $prod_view->fetch_assoc();
-    $price = $conn->query("select * from inventory where prod_id='{$_GET['product_id']}' ");
-    $price_array = array();
-    $shop_names = array();
-    $shop_ids = array();
-    while ($row = $price->fetch_assoc()) {
-        array_push($shop_names,$conn->query("select * from shop where shop_id='{$row['shop_id']}'")->fetch_row()[0]);
-        array_push($price_array, $row);
-    }
+$price_array = array();
+$prod_names = array();
+$qty_llol = array();
+while($row = $cart_items->fetch_assoc()){
+array_push($price_array,$conn->query("select * from inventory where prod_id='{$row['prod_id']}' AND shop_id='{$row['shop_id']}' "));
+array_push($prod_names,$conn->query("select * from products where product_id='{$row['prod_id']}'"));
+array_push($qty_llol,$row);
+}
+
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         //code for adding product in cart
@@ -82,13 +78,6 @@ if(!empty($_GET["action"])) {
 </tr>
 </tbody>
 </table>
-  <?php
-} else {
-?>
-<div class="no-records">Your Cart is Empty</div>
-<?php
-}
-?>
 </div>
 </body>
 </html>
