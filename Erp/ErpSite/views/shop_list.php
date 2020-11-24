@@ -47,12 +47,12 @@
                 // $product_id = $row['prod_id'];
                 // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                 echo '<tr>
-                        <a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' "> <td>'. $shop_names[$i][2] .'</td></a>
-                        <a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' "><td>'. $price_array[$i]['description'] .'</td></a>
-                        <a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] . '"> <td>'. $price_array[$i]['qty'] .'</td> </a>
-                        <a href="shop_prod_view.php?"><td>'. $price_array[$i]['price'] .'</td></a>
-                        <td>'. $price_array[$i]['discount'] .'</td>
-                    </tr>';
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $shop_names[$i][2] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['description'] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['qty'] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['price'] .'</a></td>
+                <td>'. $price_array[$i]['discount'] .'</td>
+                </tr>';
             }
             ?>
         </tbody>
