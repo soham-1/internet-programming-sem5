@@ -21,7 +21,7 @@
     $shop_names = array();
     $shop_ids = array();
     while ($row = $price->fetch_assoc()) {
-        array_push($shop_names,$conn->query("select * from shop where shop_id='{$row['shop_id']}'")->fetch_row()[0]);
+        array_push($shop_names,$conn->query("select * from shop where shop_id='{$row['shop_id']}'")->fetch_row());
         array_push($price_array, $row);
     }
 ?>
@@ -42,27 +42,18 @@
         </thead>
         <tbody>
         <?php
-        echo '<a href="shop_prod_view.php?product_id=1&shop_id=1"> '.$product_id.'</a>';
-        echo '<pre>'; print_r($shop_names); echo '</pre>';
+        // echo '<a href="shop_prod_view.php?product_id=1&shop_id=1"> '.$product_id.'</a>';
             for ($i=0; $i< count($shop_names); $i++) {
                 // $product_id = $row['prod_id'];
                 // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                 echo '<tr>
-                <td> <a href="shop_prod_view.php?product_id=1&shop_id=2"> '. $shop_names[$i] .'</a></td>
-                        <a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $row['shop_id'] .' "><td>'. $price_array[$i]['description'] .'</td></a>
-                        <a href="shop_prod_view.php?product_id='. $row['product_id'] . '&shop_id='. $row['shop_id']. '"> <td>'. $price_array[$i]['qty'] .'</td> </a>
-                        <a href="shop_prod_view.php?"><td>'. $price_array[$i]['price'] .'</td></a>
-                        <td>'. $price_array[$i]['discount'] .'</td>
-                    </tr>';
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $shop_names[$i][2] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['description'] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['qty'] .'</a></td>
+                <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['price'] .'</a></td>
+                <td>'. $price_array[$i]['discount'] .'</td>
+                </tr>';
             }
-            // } else {
-            //     echo '<tr>
-            //             <td>-</td>
-            //             <td>-</td>
-            //             <td>-</td>
-            //             <td>-</td>
-            //           </tr>';
-            // }
             ?>
         </tbody>
     </table>
