@@ -44,7 +44,7 @@
               ';
         } else {
             echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                <a href="shop_prod_view.php?product_id='. $row['product_id'] . '&shop_id='. $row['shop_id']. '">
+                <a href="shop_list.php?product_id='. $row['product_id'] . '">
                 <img src="css/defaultC.png" alt="image not available" style="width:100%">
                 </a>
                 <div class="text-container">
@@ -108,15 +108,19 @@
         while($row=$clothes->fetch_assoc()) {
             if (isset($row['image'])) {
             echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                    <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
-                    <div class="text-container">
+                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                        <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
+                    </a>
+                        <div class="text-container">
                         <h4><b>'. $row['name'] .'</b></h4>
                     </div>
                 </div>';
             } else {
                 echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                    <img src="css/defaultC.png" alt="Avatar" style="width:100%">
-                    <div class="text-container">
+                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                        <img src="css/defaultC.png" alt="Avatar" style="width:100%">
+                    </a>
+                        <div class="text-container">
                         <h4><b>'. $row['name'] .'</b></h4>
                     </div>
                 </div>';
@@ -130,14 +134,18 @@
         while($row=$daily_items->fetch_assoc()) {
             if (isset($row['image'])) {
             echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                    <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
+                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                        <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
+                    </a>
                     <div class="text-container">
                         <h4><b>'. $row['name'] .'</b></h4>
                     </div>
                 </div>';
             } else {
                 echo '<div class="card col-lg-2 col-md-4 col-sm-6">
-                    <img src="css/defaultC.png" alt="Avatar" style="width:100%">
+                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                        <img src="css/defaultC.png" alt="Avatar" style="width:100%">
+                    </a>
                     <div class="text-container">
                         <h4><b>'. $row['name'] .'</b></h4>
                     </div>

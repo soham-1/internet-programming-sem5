@@ -17,15 +17,25 @@
 <?php
 $cust_id = $_SESSION['user_id'];
 $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
-$price_array = array();
-$prod_names = array();
-$qty_llol = array();
-while($row = $cart_items->fetch_assoc()){
-array_push($price_array,$conn->query("select * from inventory where prod_id='{$row['prod_id']}' AND shop_id='{$row['shop_id']}' "));
-array_push($prod_names,$conn->query("select * from products where product_id='{$row['prod_id']}'"));
-array_push($qty_llol,$row);
+// select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
+while ($row=$cart_items->fetch_assoc()) {
+    $sql = "select i.price, p.image, p.name, c.qty from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
+    $res = $conn->query($sql);
 }
-
+// select i.price, p.image, p.name, c.qty from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id=$shop_id;
+// $row = $cart_items->fetch_assoc();
+// $prod = $conn->query("select * from inventory where prod_id='{$row['prod_id']}' AND shop_id='{$row['shop_id']}' ");
+// $row = $prod->fetch_assoc();
+// $prod_view = $conn->query("select * from products where product_id='{$_row['prod_id']}'");
+// $prod_img = $prod_view->fetch_assoc();
+//     $price = $conn->query("select * from inventory where prod_id='{$_GET['product_id']}' ");
+//     $price_array = array();
+//     $shop_names = array();
+//     $shop_ids = array();
+//     while ($row = $price->fetch_assoc()) {
+//         array_push($shop_names,$conn->query("select * from shop where shop_id='{$row['shop_id']}'")->fetch_row()[0]);
+//         array_push($price_array, $row);
+//     }
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         //code for adding product in cart
@@ -53,20 +63,21 @@ if(!empty($_GET["action"])) {
 <th style="text-align:center;" width="5%">Remove</th>
 </tr>
 <?php
-    foreach ($_SESSION["cart_item"] as $item){
-        $item_price = $item["quantity"]*$item["price"];
+    while ($row=$res->fetch_assoc()){
+        $total_quantity = 0;
+        $total_price = 0;
 		?>
 				<tr>
-				<td><img src="<?php echo $item["image"]; ?>" class="cart-item-image" /><?php echo $item["name"]; ?></td>
-				<td><?php echo $item["code"]; ?></td>
-				<td style="text-align:right;"><?php echo $item["quantity"]; ?></td>
-				<td  style="text-align:right;"><?php echo "$ ".$item["price"]; ?></td>
-				<td  style="text-align:right;"><?php echo "$ ". number_format($item_price,2); ?></td>
-				<td style="text-align:center;"><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction"><img src="icon-delete.png" alt="Remove Item" /></a></td>
+				<td><?php echo '<img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" class="cart-item-image" />' ?><?php echo $row["name"]; ?> </td>
+				<td><?php echo "dfsf" ?></td>
+				<td style="text-align:right;"><?php echo $row["qty"]; ?></td>
+				<td  style="text-align:right;"><?php echo "$ ".$row["price"]; ?></td>
+				<td  style="text-align:right;"><?php echo "$ ". number_format($row["price"]*$row["qty"],2); ?></td>
+				<td style="text-align:center;"><a href="index.php?action=remove&code=<?php echo "sfds"; ?>" class="btnRemoveAction"><img src="icon-delete.png" alt="Remove Item" /></a></td>
 				</tr>
 				<?php
-				$total_quantity += $item["quantity"];
-				$total_price += ($item["price"]*$item["quantity"]);
+				$total_quantity += $row["qty"];
+				$total_price += ($row["price"]*$row["qty"]);
 		}
 		?>
 
