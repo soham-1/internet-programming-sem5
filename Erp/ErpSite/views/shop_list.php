@@ -48,7 +48,7 @@
                 // $product_id = $row['prod_id'];
                 // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                 echo '<tr>
-                        <a href="shop_prod_view.php?product_id=1&shop_id=2"> <td>'. $shop_names[$i] .'</td></a>
+                <td> <a href="shop_prod_view.php?product_id=1&shop_id=2"> '. $shop_names[$i] .'</a></td>
                         <a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $row['shop_id'] .' "><td>'. $price_array[$i]['description'] .'</td></a>
                         <a href="shop_prod_view.php?product_id='. $row['product_id'] . '&shop_id='. $row['shop_id']. '"> <td>'. $price_array[$i]['qty'] .'</td> </a>
                         <a href="shop_prod_view.php?"><td>'. $price_array[$i]['price'] .'</td></a>
