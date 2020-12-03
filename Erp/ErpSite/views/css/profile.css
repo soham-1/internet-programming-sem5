@@ -16,13 +16,14 @@ body{
     margin: 50px 0 0 100px;
 }
 .side-section{
-    z-index: 0;
-    padding: 0 50px 0 50px;
+    padding: 0 20px 0 20px;
     flex-direction: column;
 }
 .form-section{
     flex-direction: column;
     position: relative;
+    margin-left: 10px;
+    padding: 10px;
     top: 100px;
 }
 .details{
@@ -74,7 +75,18 @@ input[type="text"]:focus, input[type="email"]:focus{
     font-size: 11px;
 }
 #email{
-    left: 20px;
+    /* left: 20px; */
+    width: 33.33%;
+}
+#email-val{
+    width: 58.33%;
+    position: relative;
+}
+#email-val1{
+    width: 58.33%;
+    position: relative;
+    justify-content: right;
+    left: 40px;
 }
 label#email{
     width: max-content;
