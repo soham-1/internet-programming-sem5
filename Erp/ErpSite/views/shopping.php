@@ -10,7 +10,6 @@
 <head>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/shopping.css">
-    <script src="js/shopping.js"></script>
 </head>
 
 <?php
@@ -102,12 +101,12 @@
               <button class="next" >next</button>
     </div><br>
 
-    <a href="category_list.php?category=clothes"><h2>clothes</h2></a>
-    <div class="row">
+    <a href="category_list.php?category=clothes" id="category-title"><h2>clothes</h2></a>
+    <div class="row col-sm-12 col-md-4 col-lg-3" id="category">
         <?php
         while($row=$clothes->fetch_assoc()) {
             if (isset($row['image'])) {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+            echo '<div class="card col-lg-2 col-md-4 col-sm-12">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
                     </a>
@@ -116,7 +115,7 @@
                     </div>
                 </div>';
             } else {
-                echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+                echo '<div class="card col-lg-2 col-md-4 col-sm-12">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                     </a>
@@ -128,12 +127,12 @@
         }
         ?>
     </div>
-    <a href="category_list.php?category=daily"><h2>daily items</h2></a>
-    <div class="row">
+    <a href="category_list.php?category=daily" id="category-title"><h2>daily items</h2></a>
+    <div class="row" id="category">
         <?php
         while($row=$daily_items->fetch_assoc()) {
             if (isset($row['image'])) {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+            echo '<div class="card col-lg-2 col-md-4 col-sm-12">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
                     </a>
@@ -142,7 +141,7 @@
                     </div>
                 </div>';
             } else {
-                echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+                echo '<div class="card col-lg-2 col-md-4 col-sm-12">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                     </a>
@@ -158,10 +157,16 @@
 </body>
 <script>
     let count = 0;
-    let visible_items = 4;
+    let visible_items;
     let num_slides;
     let element = $('#popular .card');
-    // let element = $('.row .card');
+    if (screen.width<=600) {
+        visible_items=1;
+    } else if (screen.width>600 && screen.width<=768) {
+        visible_items=3;
+    } else if (screen.width>768) {
+        visible_items=4;
+    }
 
     for (i=0; i<element.length; i++) {
         element[i].style.display = "none";
