@@ -69,7 +69,7 @@ else{
   $loggedin = false;
 }
 $index_url = $dir . "/index.php";
-$login_url = $dir . "/login.php";
+$login_url = "../login.php";
 $signup_url = $dir . "/signup.php";
 $logout_url = $dir . "/logout.php";
 echo'
