@@ -1,4 +1,29 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+	include '../models/connDB.php';
+$cust_id = $_POST['CUST_ID'];
+$amount = $_POST['TXN_AMOUNT'];
+$payment_method = "Paytm";
+
+$balance = 0;
+$cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
+// select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
+while ($row=$cart_items->fetch_assoc()) {
+    $sql3 = "select i.price, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
+	$res = $conn->query($sql3);
+	$shop_id = $row['shop_id'];
+
+}
+$sql = "INSERT INTO `payments` ( `cust_id`, `amount`, `shop_id`,`balance`,`payment_method`) VALUES ('$cust_id', '$amount',  '$shop_id', '$balance','$payment_method')";
+$result = mysqli_query($conn,$sql);
+$payment_id=mysqli_insert_id($conn);
+while ($row=$res->fetch_assoc()){
+	$sql2 = "INSERT INTO `payment_details` ( `payment_id`, `prod_id`, `qty`) VALUES ('$payment_id', '{$row['product_id']}','{$row['qty']}')";
+
+$result2 = mysqli_query($conn,$sql2);
+}
+}
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");

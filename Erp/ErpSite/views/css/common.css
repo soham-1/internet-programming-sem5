@@ -96,6 +96,11 @@ html, body{
   background-color: #28a745;
   border-color: #28a745;
 }
+.btn-danger{
+  color: white;
+  background-color: #af2513;
+  border-color: #af2513;
+}
 .btn-success:active{
   background-color:  #249e2e;
 }
