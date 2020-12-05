@@ -24,7 +24,7 @@ else{
   if ($password == $cpassword ){
     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
       $hash = password_hash($password, PASSWORD_DEFAULT);
-      $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups`) VALUES ('$username', '$hash',  '$email', '$group')";
+      $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
       $result = mysqli_query($conn,$sql);
       if ($result){
               $showalert = true;
@@ -423,7 +423,7 @@ body {
         </div>
 
         <label style="color:white;">Group</label>
-       <?php  $sql = "SELECT * FROM groups";
+       <?php  $sql = "SELECT * FROM groups1";
         $result = mysqli_query($conn,$sql);
 
 echo "</select>";
