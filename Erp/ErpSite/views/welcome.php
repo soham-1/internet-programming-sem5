@@ -119,7 +119,6 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 
   <div class="topnav">
   <div class="topnav-right">
-    <a href="shop_info.php">Shop info</a>
     <div class="dropdown">
     <button class="dropbtn"><i class="fas fa-user"></i>
       <i class="fa fa-caret-down"></i>
@@ -131,7 +130,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
-  <a href="#search">Search</a>
+  <a href="welcome_content.php">Shop</a>
   </div>
   
 </div>
@@ -237,7 +236,6 @@ else{
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
-  <a href="#search">Search</a>
   </div>
 </div>
 

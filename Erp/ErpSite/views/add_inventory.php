@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/prod_form.css">
 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -33,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <body>
 
 <div class=outer-container>
-    <div class="container">
+    <div class="container col-lg-10 col-md-11 col-sm-12">
  
       <header>Product Form</header>
 
 <div class="form-outer">
 <form action="add_inventory.php" method=POST>
     <div class="row">
-      <div class="field">
+      <div class="field col-lg-2 col-md-4 col-sm-12">
         <label for="category">products</label>
       </div>
       <div class="col-75">
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
 
     <div class="row">
-      <div class="field">
+      <div class="field col-lg-2 col-md-4 col-sm-12">
         <label for="description">Description<sup style="color:red;">*</sup></label>
       </div>
       <div class="col-75">
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
     </div>
     <div class="row">
-      <div class="field">
+      <div class="field col-lg-2 col-md-4 col-sm-12">
         <label for="price">Price<sup style="color:red;">*</sup></label>
       </div>
       <div class="col-25">
@@ -72,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
     </div>
     <div class="row">
-      <div class="field">
+      <div class="field col-lg-2 col-md-4 col-sm-12">
         <label for="price">qty<sup style="color:red;">*</sup></label>
       </div>
       <div class="col-25">
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
     </div>
     <div class="row">
-      <div class="field">
+      <div class="field col-lg-2 col-md-4 col-sm-12">
         <label for="price">discount<sup style="color:red;">*</sup></label>
       </div>
       <div class="col-25">
