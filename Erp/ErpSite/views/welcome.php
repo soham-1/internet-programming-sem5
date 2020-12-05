@@ -156,8 +156,8 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
             <span class="fas fa-caret-down second"></span>
           </a>
           <ul class="serv-show">
-<li><a href="#">Pending Payments</a></li>
-<li><a href="#">Payment Report</a></li>
+<li><a href="pending_payments.php?user=shop">Pending Payments</a></li>
+<li><a href="payments.php?user=shop">All Payments</a></li>
 </ul>
 </li>
 <li><a href="inventory.php">Inventory Management</a></li>
@@ -208,8 +208,8 @@ elseif(implode($_SESSION['group_name'])=='customer'){
             <span class="fas fa-caret-down second"></span>
           </a>
           <ul class="serv-show">
-<li><a href="#">Pending Payments</a></li>
-<li><a href="#">Payment Report</a></li>
+<li><a href="pending_payments.php?user=customer">Pending Payments</a></li>
+<li><a href="payments.php?user=customer">All Payment</a></li>
 </ul>
 </li>
 <li><a href="#"></a></li>

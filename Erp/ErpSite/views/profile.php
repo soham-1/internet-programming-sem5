@@ -176,6 +176,7 @@ $email; $picture; $address; $phone_no; $shop;
         $sql = "Update shop set shop_name='{$_POST['shop_name']}', category='{$_POST['category']}' where shop_owner='{$_SESSION['user_id']}'";
         $conn->query($sql);
         $res = $conn->query("select * from address where user_id='{$_SESSION['user_id']}'");
+        $details_flag=true;
         if ($res->num_rows > 0  && is_numeric($_POST['pincode'])) {
             $sql = "update address set blg='{$_POST['building']}', lane='{$_POST['lane']}',
                     landmark='{$_POST['landmark']}', city='{$_POST['city']}', pincode='{$_POST['pincode']}'
