@@ -17,6 +17,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
     <meta charset="utf-8">
     <!-- Somehow I got an error, so I comment the title, just uncomment to show -->
     <!-- <title>Sidebar Menu with sub-menu | CodingNepal</title> -->
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/sidebar_style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -132,13 +133,14 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
   </div>
   <a href="#search">Search</a>
   </div>
+  
 </div>
 
     <div class="btn">
       <span class="fas fa-bars" style="margin-left: 0px;"></span>
     </div>
 <nav class="sidebar">
-<a href="welcome.php"><div class="text">LOCCO ERP</div></a>
+<a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="#">Dashboard</a></li>
 <li>

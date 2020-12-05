@@ -25,13 +25,13 @@
 
 <body>
 <div class="outer-container">
-    <div class="row" id="popular">
+    <div class="row col-lg-6 col-md-4 col-sm-11" id="popular">
     <!-- <i class="fas fa-angle-left angle"></i> -->
     <button class="prev" disabled>prev</button>
     <?php
     while($row=$products->fetch_assoc()) {
         if (isset($row['image'])) {
-        echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+        echo '<div class="card col-lg-2 col-md-6 col-sm-11">
                 <a href="shop_list.php?product_id='. $row['product_id'] . '">
                 <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
                 </a>
@@ -42,7 +42,7 @@
               </div>
               ';
         } else {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-6">
+            echo '<div class="card col-lg-2 col-md-4 col-sm-11">
                 <a href="shop_list.php?product_id='. $row['product_id'] . '">
                 <img src="css/defaultC.png" alt="image not available" style="width:100%">
                 </a>
@@ -102,11 +102,11 @@
     </div><br>
 
     <a href="category_list.php?category=clothes" id="category-title"><h2>clothes</h2></a>
-    <div class="row col-sm-12 col-md-4 col-lg-3" id="category">
+    <div class="row col-lg-8 col-md-4 col-sm-11" id="category">
         <?php
         while($row=$clothes->fetch_assoc()) {
             if (isset($row['image'])) {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-12">
+            echo '<div class="card col-lg-2 col-md-4 col-sm-11 id="clothes">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
                     </a>
@@ -115,7 +115,7 @@
                     </div>
                 </div>';
             } else {
-                echo '<div class="card col-lg-2 col-md-4 col-sm-12">
+                echo '<div class="card col-lg-2 col-md-4 col-sm-11">
                     <a href="shop_list.php?product_id='. $row['product_id'] . '">
                         <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                     </a>

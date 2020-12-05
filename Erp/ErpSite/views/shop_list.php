@@ -28,7 +28,7 @@
 <body>
 <div class="outer-container">
 
-    <div class="container col-lg-10 col-md-10 col-sm-12">
+    <div class="container col-lg-10 col-md-12 col-sm-12">
     <table id="table_id" class="display">
         <thead>
             <tr>
