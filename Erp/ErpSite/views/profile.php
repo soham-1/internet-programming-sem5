@@ -11,15 +11,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmCmocdc-FcRhLg4bxhzuAca9jXJ3mGSo&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script> -->
     <?php require 'welcome.php'; ?>
     <?php include('../models/connDB.php'); ?>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/profile.css">
     <title>ERP</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfwUiO930s5L_dYjM3L10rSKLcXciNGEE&callback=initMap&libraries=&v=weekly"></script>
+    <script>
+      function writeAddressName(latLng) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+          "location": latLng
+        },
+        function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK)
+            document.getElementById("address").innerHTML = results[0].formatted_address;
+          else
+            document.getElementById("error").innerHTML += "Unable to retrieve your address" + "<br />";
+        });
+      }
+
+      function geolocationSuccess(position) {
+        var userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        // Write the formatted address
+        writeAddressName(userLatLng);
+
+        var myOptions = {
+          zoom : 16,
+          center : userLatLng,
+          mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+        // Draw the map
+        var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+        // Place the marker
+        new google.maps.Marker({
+          map: mapObject,
+          position: userLatLng
+        });
+        // Draw a circle around the user position to have an idea of the current localization accuracy
+        var circle = new google.maps.Circle({
+          center: userLatLng,
+          radius: position.coords.accuracy,
+          map: mapObject,
+          fillColor: '#0000FF',
+          fillOpacity: 0.5,
+          strokeColor: '#0000FF',
+          strokeOpacity: 1.0
+        });
+        mapObject.fitBounds(circle.getBounds());
+      }
+
+      function geolocationError(positionError) {
+        document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
+      }
+
+      function geolocateUser() {
+        // If the browser supports the Geolocation API
+        if (navigator.geolocation)
+        {
+          var positionOptions = {
+            enableHighAccuracy: true,
+            timeout: 10 * 1000 // 10 seconds
+          };
+          navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
+        }
+        else
+          document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
+      }
+
+      window.onload = geolocateUser;
+    </script>
+    <style type="text/css">
+      #map {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
 </head>
 <?php 
 $email; $picture; $address; $phone_no; $shop;
@@ -44,61 +111,88 @@ $email; $picture; $address; $phone_no; $shop;
     }
 
     if (count($_POST)>0 && isset($_POST['email'])) {
-        // $phone_no_array = array();
-        // foreach ($_POST as $key => $val){
-        //     if (is_numeric($val)) {
-        //         array_push($phone_no_array, $val);
-        //     }
-        // }
-        // if (count($phone_no_array) > 0) {
-        //     foreach ($phone_no_array as $key => $val) {
-        //         $result = $conn->query("select * from phone_no where user_id='{$_SESSION['user_id']}' and phone_no='{$val}'");
-        //         if ($result->num_rows>0) {
-        //             $conn->query("update phone_no set phone_no='{$val}' where user_id='{$_SESSION['user_id']}'");
-        //         } else {
-        //             $conn->query("inset into phone_no(phone_no, where user_id) values('{$val}', '{$_SESSION['user_id']}')");
-        //         }
-        //     }
-        // }
-        if ($_FILES['profile_picture']['tmp_name'] != "") {
-            $res = $conn->query("Select shop_id from shop where shop_owner = " . $_SESSION['user_id'] . " limit 1");
-            $imgData = addslashes(file_get_contents($_FILES['profile_picture']['tmp_name']));
-            $imageProperties = getimageSize($_FILES['profile_picture']['tmp_name']);
-            if ($res->num_rows > 0) {
-                $sql = "Update shop set picture='{$imgData}' where shop_owner='{$_SESSION['user_id']}'";
-                $conn->query($sql);
-            }
-            else {
-                $sql = "INSERT INTO shop(shop_id,picture)
-                        VALUES('{$_SESSION['user_id']}', '{$imgData}')";
-                $conn->query($sql);
+        $phone_no_array = array();
+        foreach ($_POST as $key => $val){
+            if (is_numeric($val) || $val=="") {
+                array_push($phone_no_array, $val);
             }
         }
-        $conn->query("update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
+        $phone_flag=true;
+        if (count($phone_no_array) > 0) {
+            $result = $conn->query("select * from phone_no where user_id='{$_SESSION['user_id']}'");
+            $count1=0;
+            while($row=$result->fetch_assoc()){
+                if (is_numeric($phone_no_array[$count1]) && strlen($phone_no_array[$count1])==10) {
+                    $conn->query("update phone_no set phone_no='{$phone_no_array[$count1]}' where user_id='{$_SESSION['user_id']}' and phone_no='{$row['phone_no']}' ");
+                    $count1++;
+                } else {
+                    $phone_flag=false;
+                }
+            }
+            if (isset($phone_no_array[$count1]) && $phone_no_array[$count1]!="" && strlen($val)==10) {
+                $conn->query("insert into phone_no(phone_no, user_id) values('{$phone_no_array[$count1]}', '{$_SESSION['user_id']}')");
+            }
+        }
+        try{
+            if ($_FILES['profile_picture']['tmp_name'] != "") {
+                $res = $conn->query("Select shop_id from shop where shop_owner = " . $_SESSION['user_id'] . " limit 1");
+                $imgData = addslashes(file_get_contents($_FILES['profile_picture']['tmp_name']));
+                $imageProperties = getimageSize($_FILES['profile_picture']['tmp_name']);
+                if ($res->num_rows > 0) {
+                    $sql = "Update shop set picture='{$imgData}' where shop_owner='{$_SESSION['user_id']}'";
+                    $conn->query($sql);
+                }
+                else {
+                    $sql = "INSERT INTO shop(shop_id,picture)
+                            VALUES('{$_SESSION['user_id']}', '{$imgData}')";
+                    $conn->query($sql);
+                }
+            }
+        } catch (Exception $e) {
+            echo 'alert("we couldnt update your profile pic, please try again")' ;
+        }
+        $email_flag=true;
+        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ) {
+            $conn->query("Update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
+        } else {
+            $email_flag=false;
+        }
+        if ($phone_flag==false) {
+            echo "<script>alert('wrong phone no !')</script>";
+        } else if ($email_flag==false) {
+            echo "<script>alert('wrong email !')</script>";
+        } else {
+            echo "<script>alert('profile updated')</script>";
+        }
     }
     if (count($_POST)>0 && isset($_POST['building'])) {
         $sql = "Update shop set shop_name='{$_POST['shop_name']}', category='{$_POST['category']}' where shop_owner='{$_SESSION['user_id']}'";
         $conn->query($sql);
         $res = $conn->query("select * from address where user_id='{$_SESSION['user_id']}'");
-        if ($res->num_rows > 0) {
+        if ($res->num_rows > 0  && is_numeric($_POST['pincode'])) {
             $sql = "update address set blg='{$_POST['building']}', lane='{$_POST['lane']}',
                     landmark='{$_POST['landmark']}', city='{$_POST['city']}', pincode='{$_POST['pincode']}' 
                     where user_id='{$_SESSION['user_id']}' ";
             $conn->query($sql);
-        } else {
+        } else if (is_numeric($_POST['pincode'])) {
             $sql = "Insert into address(user_id, blg, lane, landmark, city, pincode)"."
                     values('{$_SESSION['user_id']}', '{$_POST['building']}', '{$_POST['lane']}', '{$_POST['landmark']}', '{$_POST['city']}', '{$_POST['pincode']}')";
             $conn->query($sql);
+        } else {
+            $details_flag=false;
         }
-        echo "<script>alert('details updated')</script>";
+        if ($details_flag==false) {
+            echo "<script>alert('wrong info added')</script>";
+        } else {
+            echo "<script>alert('details updated')</script>";
+        }
     }
-
 ?>
 <body>
     <?php get_user_details(); ?>
 
-    <div class="container">
-        <div class="side-section col-lg-3 col-md-6 col-sm-12">
+    <div class="container col-sm-11">
+        <div class="side-section col-lg-3 col-md-6 col-sm-10">
             <form enctype="multipart/form-data" name="updateForm" action="profile.php" method="post" id="side-form">
                 <div class="profile-image">
                     <?php
@@ -111,7 +205,7 @@ $email; $picture; $address; $phone_no; $shop;
                     <input type="file" name="profile_picture" id="profile-upload" style="visibility:hidden;">
                     <div class="row" style="visibility:hidden;"></div>
                 </div>
-                <!-- <div id="mapholder">map</div> -->
+                <div id="map"></div>
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
                     <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
@@ -125,12 +219,16 @@ $email; $picture; $address; $phone_no; $shop;
                             </div>';
                         $count += 1;
                     }
+                    echo '<div class="row">
+                                <label for="email" class="detail-field values" id="email">phone_no '.$count.'</label>
+                                <input type="text" class="detail-field " id="email-val1" name="'.(string)$count.'" value="" >
+                            </div>';
                 ?>
                 <button class="bsbtn btn-success" id="form-btn" type="submit">update</button>
             </form>
         </div>
 
-        <div class="form-section col-lg-7 col-md-6 col-sm-12">
+        <div class="form-section col-lg-7 col-md-7 col-sm-11">
             <form name="updateForm" action="profile.php" method="post" id="main-form">
                 <div class="details">
                     <div class="header">
@@ -182,33 +280,7 @@ $email; $picture; $address; $phone_no; $shop;
 </body>
 
 <script type="text/javascript">
-        //  function showLocation(position) {
-        //     var latitude = position.coords.latitude;
-        //     var longitude = position.coords.longitude;
-        //     var latlongvalue = position.coords.latitude + ","
-        //     + position.coords.longitude;
-        //     var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
-        //     +latlongvalue+"&amp;zoom=14&amp;size=400x300&amp;key=AIzaSyAmCmocdc-FcRhLg4bxhzuAca9jXJ3mGSo";
-        //     document.getElementById("mapholder").innerHTML =
-        //     "<img src='"+img_url+"'>";
-        //  }
-        //  function errorHandler(err) {
-        //     if(err.code == 1) {
-        //        alert("Error: Access is denied!");
-        //     } else if( err.code == 2) {
-        //        alert("Error: Position is unavailable!");
-        //     }
-        //  }
-        //  function getLocation(){
-        //     if(navigator.geolocation){
-        //        // timeout at 60000 milliseconds (60 seconds)
-        //        var options = {timeout:60000};
-        //        navigator.geolocation.watchPosition(showLocation, errorHandler, options);
-        //     } else{
-        //        alert("Sorry, browser does not support geolocation!");
-        //     }
-        //  }
-        //  getLocation();
+        
         $('#camera-icon').bind("click", function () {
             $("#profile-upload").trigger("click");
         });

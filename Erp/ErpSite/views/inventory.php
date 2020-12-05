@@ -19,15 +19,20 @@ $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['
 $products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' ");
 
 if (count($_GET)>0) {
-    $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
+    if (is_numeric($_GET['qty']) && is_numeric($_GET['discount']) && $_GET['discount']>=0 && $_GET['qty']>=0){
+        $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
+    } else {
+        echo '<script> alert("wrong inputs") </script>';
+    }
+
 }
 ?>
 
 <body>
 <div class="outer-container">
 
-    <div class="container col-lg-10 col-md-12 col-sm-12">
-    <table id="table_id" class="display" style="width: 100%; overflow: scroll;">
+    <div class="container col-lg-10 col-md-10 col-sm-12">
+    <table id="table_id" class="display">
         <thead>
             <tr>
                 <th>Product</th>
@@ -76,7 +81,12 @@ if (count($_GET)>0) {
 </body>
 <script>
     $(document).ready( function () {
-        $('#table_id').DataTable();
+        $('#table_id').DataTable( {
+    responsive: true
+} );
+$(window).resize(function () {
+            $("table.dataTable").resize();
+});
 
         $('.edit-button').click(function() {
             var id = this.id;
@@ -117,7 +127,7 @@ if (count($_GET)>0) {
                 url: 'inventory.php',
                 data: values,
                 success: function (response) {
-                alert('updated successfully !');
+                // alert('updated successfully !');
                 $(form).html(response);
                 }
             });

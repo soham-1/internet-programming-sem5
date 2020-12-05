@@ -22,7 +22,7 @@ body{
 .form-section{
     flex-direction: column;
     position: relative;
-    margin-left: 10px;
+    margin-left: 50px;
     padding: 10px;
     top: 100px;
 }
@@ -98,3 +98,15 @@ label#email{
     bottom: 0;
     margin-top: 50px;
 }
+
+@media screen and (max-width: 600px) {
+    .container{
+        margin: 10px 20px 0 10px;
+    }
+    .form-section{
+    left: 0;
+      width: 100%;
+      margin: 0 5px 0 5px;
+      justify-content: center;
+    }
+  }
