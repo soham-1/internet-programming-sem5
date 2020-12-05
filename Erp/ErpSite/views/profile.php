@@ -111,17 +111,17 @@ $email; $picture; $address; $phone_no; $shop;
                     <input type="file" name="profile_picture" id="profile-upload" style="visibility:hidden;">
                     <div class="row" style="visibility:hidden;"></div>
                 </div>
-                <div id="mapholder">map</div>
+                <!-- <div id="mapholder">map</div> -->
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
-                    <input type="text" class="detail-field values" id="email" name="email" value=<?php echo $email; ?>>
+                    <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
                 </div>
                 <?php
                     $count=1;
                     while ($row=$phone_no->fetch_assoc()) {
                         echo '<div class="row">
                                 <label for="email" class="detail-field values" id="email">phone_no '.$count.'</label>
-                                <input type="text" class="detail-field values" id="email" name="'.(string)$count.'" value="'.$row['phone_no'].'" >
+                                <input type="text" class="detail-field " id="email-val1" name="'.(string)$count.'" value="'.$row['phone_no'].'" >
                             </div>';
                         $count += 1;
                     }

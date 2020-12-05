@@ -26,8 +26,8 @@ if (count($_GET)>0) {
 <body>
 <div class="outer-container">
 
-    <div class="container col-lg-10 col-md-10 col-sm-12">
-    <table id="table_id" class="display">
+    <div class="container col-lg-10 col-md-12 col-sm-12">
+    <table id="table_id" class="display" style="width: 100%; overflow: scroll;">
         <thead>
             <tr>
                 <th>Product</th>

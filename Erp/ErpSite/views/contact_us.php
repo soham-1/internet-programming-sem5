@@ -8,6 +8,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/contact_us.css">
+    <link rel="stylesheet" href="css/common.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 <?php
@@ -19,7 +20,7 @@
 
   <body>
       <div class="outer-container">
-    <div class="container">
+    <div class="container col-lg-10 col-md-10 col-sm-10">
       <div class="text">Contact us</div>
 <form action="contact_us.php" method="post">
         <div class="form-row">
@@ -64,8 +65,8 @@
           <div class="input-data">
             <div class="inner"></div>
             <input type="submit" value="submit">
+            </div>
           </div>
-        </div>
       </form>
     </div>
     </div>

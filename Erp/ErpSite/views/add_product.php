@@ -29,6 +29,7 @@ $sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/prod_form.css">
 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -36,7 +37,7 @@ $sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description
   <body>
 
 <div class=outer-container>
-    <div class="container">
+    <div class="container col-lg-10 col-md-11 col-sm-12">
 
       <header>Product Form</header>
 

@@ -68,10 +68,10 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
 else{
   $loggedin = false;
 }
-$index_url = $dir . "/index.php";
-$login_url = $dir . "/login.php";
-$signup_url = $dir . "/signup.php";
-$logout_url = $dir . "/logout.php";
+$index_url = "index.php";
+$login_url = "login.php";
+$signup_url = "signup.php";
+$logout_url = "logout.php";
 echo'
 <div class="topnav" id="myTopnav">
   <a href="' . $index_url . '" class="active">Home</a>';

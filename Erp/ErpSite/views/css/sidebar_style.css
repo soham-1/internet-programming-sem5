@@ -30,15 +30,17 @@
   content: '\f00d';
 }
 .sidebar{
-  position: fixed;
+  position: absolute;
+  top: 0;
   width: 250px;
   height: 100%;
   left: -250px;
-  background: rgb(25,39,59);
+  background: rgba(25,39,59, 1);
   transition: left 0.4s ease;
 }
 .sidebar.show{
   left: 0px;
+  z-index: 2;
 }
 .sidebar .text{
   color: white;

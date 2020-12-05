@@ -33,6 +33,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/contact_us.css">
+    <link rel="stylesheet" href="css/common.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
@@ -70,7 +71,7 @@ chart.render();
 
 <body>
     <div class="outer-container">
-        <div class="container col-lg-10 col-md-10 col-sm-12">
+        <div class="container col-lg-10 col-md-10 col-sm-10">
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
             <form action="#" method="get">
