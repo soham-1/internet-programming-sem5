@@ -52,6 +52,7 @@ else{
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/common.css">
     <title>ERP</title>
     <style>
         html {
@@ -68,7 +69,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 400px;
+  /* width: 400px; */
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0,0,0,.5);
@@ -237,7 +238,7 @@ body {
 </head>
 <body>
 <?php
-    require 'partials/_nav.php'
+    require '_nav.php'
     ?>
       <?php
    if($login){
@@ -257,7 +258,7 @@ body {
 </div>';
 }
 ?>
-     <div class="login-box">
+     <div class="login-box col-lg-4 col-md-10 col-sm-10">
     <h2>Login</h2>
     <form action="login.php" method="post">
     <div class="user-box">

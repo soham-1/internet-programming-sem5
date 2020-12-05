@@ -1,9 +1,16 @@
 <?php
 
+// development
 $host = "localhost";
 $username = "root";
 $password = "";
 $db = "ErpDb";
+
+// production
+// $host = "remotemysql.com";
+// $username = "GWp5WvpzQw";
+// $password = "Fcsz9IwNzq";
+// $db = "GWp5WvpzQw";
 
 $conn = new mysqli($host, $username, $password, $db);
 
