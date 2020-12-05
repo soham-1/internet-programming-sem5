@@ -132,7 +132,7 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
   </div>
   <a href="welcome_content.php">Shop</a>
   </div>
-  
+
 </div>
 
     <div class="btn">
@@ -201,7 +201,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 <nav class="sidebar">
 <a href="welcome.php"><div class="text">LOCCO ERP</div></a>
 <ul>
-<li class="active"><a href="#">My Orders</a></li>
+<li class="active"><a href="my_orders.php">My Orders</a></li>
 
 <li>
           <a href="#" class="serv-btn">Payment
