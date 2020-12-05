@@ -21,7 +21,7 @@ $exists = false;
                 // $sql3 = "Select groups from user where username=".$username;
                 // $group_id = mysqli_query($conn, $sql3);
                 // $groupid =mysqli_fetch_array($group_id);
-                $sql1 = "SELECT group_name from groups WHERE id=".$row['groups'];
+                $sql1 = "SELECT group_name from groups1 WHERE id=".$row['groups1'];
                 $result1 = mysqli_query($conn, $sql1);
                 $name = mysqli_fetch_assoc($result1);
                 $sql2 = "Select * from cart where customer_id=".$row['user_id'];
@@ -30,7 +30,7 @@ $exists = false;
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $row['user_id'];
-                $_SESSION['group_id'] = $row['groups'];
+                $_SESSION['group_id'] = $row['groups1'];
                 $_SESSION['group_name'] = $name;
                 $_SESSION['cart'] = $num2;
 

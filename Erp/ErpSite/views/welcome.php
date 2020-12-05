@@ -1,22 +1,15 @@
 <?php
-
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-  header("location: login.php");
-  exit;
-}
-
-$dir = explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to user folder
-$basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
+  session_start();
+  if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+    header("location: login.php");
+    exit;
+  }
 ?>
 
 <!DOCTYPE html>
-<!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <!-- Somehow I got an error, so I comment the title, just uncomment to show -->
-    <!-- <title>Sidebar Menu with sub-menu | CodingNepal</title> -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/sidebar_style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -76,10 +69,6 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
   font-family: inherit;} /* Important for vertical align on mobile phones
   margin: 0; /* Important for vertical align on mobile phones
 }
-
-/* Add a red background color to navbar links on hover*/
-
-
 
 /*  Dropdown content (hidden by default)*/
 .dropdown-content {
@@ -156,8 +145,8 @@ $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
             <span class="fas fa-caret-down second"></span>
           </a>
           <ul class="serv-show">
-<li><a href="#">Pending Payments</a></li>
-<li><a href="#">Payment Report</a></li>
+<li><a href="pending_payments.php?user=shop">Pending Payments</a></li>
+<li><a href="payments.php?user=shop">All Payments</a></li>
 </ul>
 </li>
 <li><a href="inventory.php">Inventory Management</a></li>
@@ -208,8 +197,8 @@ elseif(implode($_SESSION['group_name'])=='customer'){
             <span class="fas fa-caret-down second"></span>
           </a>
           <ul class="serv-show">
-<li><a href="#">Pending Payments</a></li>
-<li><a href="#">Payment Report</a></li>
+<li><a href="pending_payments.php?user=customer">Pending Payments</a></li>
+<li><a href="payments.php?user=customer">All Payment</a></li>
 </ul>
 </li>
 <li><a href="#"></a></li>
@@ -272,8 +261,6 @@ else{
 </nav>';}
 
   ?>
-<!-- <p class="mb-0">Whenever you need to, Logout <a href="logout.php">using this link.</a> -->
-
 
 <script>
       $(document).ready(function(){
