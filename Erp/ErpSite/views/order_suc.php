@@ -30,9 +30,24 @@ $sql2 = "INSERT INTO `payment_details` ( `payment_id`, `prod_id`, `qty`) VALUES 
 
 $result2 = mysqli_query($conn,$sql2);
 }
+
 }
+$sql5 = "SELECT * from shop WHERE shop_id='{$shop_id}'";
+$result5 = mysqli_query($conn, $sql5);
+$id3 = mysqli_fetch_assoc($result5);
+$sql6 = "SELECT * from address WHERE user_id='{$id3['shop_owner']}'";
+$result6 = mysqli_query($conn, $sql6);
+$address = mysqli_fetch_assoc($result6);
 ?>
+
 <head>
+<style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        width: 30%;
+        /* The width is the width of the web page */
+      }
+    </style>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/prod_form.css">
 </head>
@@ -45,28 +60,49 @@ $result2 = mysqli_query($conn,$sql2);
           <i class="fa fa-shopping-cart"></i>
         </span></header>
         <div class=row>
-        <img src=js/3.gif style=width:15%>
+        <img src=js/3.gif style=width:5%>
         Your order is Confirmed
 </div>
 Please collect your order from
-<div id=map></div>
+<p>
+Shop Name:<strong> <?php echo$id3['shop_name'] ?></strong>
+<br>
+Shop reg_no:<strong> <?php echo$id3['reg_no'] ?></strong>
+<br>
+Shop Category:<strong> <?php echo$id3['category'] ?></strong>
+<br>
+Shop Address:<strong>
+<?php echo $address['blg'], $address['lane'], $address['landmark'], $address['city'], $address['pincode'];
+
+echo'<img src="data:image/png;charset=utf8;base64,' . base64_encode($id3['picture']) . '" class="rounded-img" />' ?>
+</strong>
+    </p>
+
 
         </div>
     </div>
 </body>
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRtriDLo0bnzuCz9xL5wQmclzUTEeh69Y&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
-
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
     <script>
       // Initialize and add the map
       function initMap() {
         // The location of Uluru
-        const uluru = { lat: <?php echo $address[6]; ?>,lng: <?php echo $address[7]; ?> };
+        const uluru = { lat: -25.344, lng: 131.036 };
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 14,
+          zoom: 4,
           center: uluru,
         });
         // The marker, positioned at Uluru
@@ -76,4 +112,7 @@ Please collect your order from
         });
       }
     </script>
+
+    <!--The div element for the map -->
+
 </html>

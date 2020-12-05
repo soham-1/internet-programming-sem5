@@ -293,28 +293,7 @@ $email; $picture; $address; $phone_no; $shop;
 
 
 </body>
-<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRtriDLo0bnzuCz9xL5wQmclzUTEeh69Y&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
 
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of Uluru
-        const uluru = { lat: <?php echo $address[6]; ?>,lng: <?php echo $address[7]; ?> };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 14,
-          center: uluru,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-        });
-      }
-    </script>
 
 
 
