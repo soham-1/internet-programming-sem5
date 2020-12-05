@@ -52,15 +52,17 @@ if(!empty($_GET["action"])) {
     }
     }
 ?>
-<table class="tbl-cart" cellpadding="10" cellspacing="1">
+<table class="tbl-cart" cellpadding="10"  style="border:2px solid black;">
 <tbody>
 <tr>
 <th style="text-align:left;">Name</th>
+<th >Image</th>
 <th style="text-align:left;">Code</th>
 <th style="text-align:right;" width="5%">Quantity</th>
 <th style="text-align:right;" width="10%">Unit Price</th>
 <th style="text-align:right;" width="10%">Price</th>
 <th style="text-align:center;" width="5%">Remove</th>
+<br>
 </tr>
 <?php
     while ($row=$res->fetch_assoc()){
@@ -68,7 +70,9 @@ if(!empty($_GET["action"])) {
         $total_price = 0;
 		?>
 				<tr>
-				<td><?php echo '<img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" class="cart-item-image" />' ?><?php echo $row["name"]; ?> </td>
+                <td><?php echo $row["name"]; ?> </td>
+				<td><?php echo '<img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" class="cart-item-image" style="width:10%"/>' ?></td>
+
 				<td><?php echo "dfsf" ?></td>
 				<td style="text-align:right;"><?php echo $row["qty"]; ?></td>
 				<td  style="text-align:right;"><?php echo "$ ".$row["price"]; ?></td>
@@ -82,6 +86,7 @@ if(!empty($_GET["action"])) {
 		?>
 
 <tr>
+<br>
 <td colspan="2" align="right">Total:</td>
 <td align="right"><?php echo $total_quantity; ?></td>
 <td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price, 2); ?></strong></td>

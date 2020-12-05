@@ -30,7 +30,7 @@ $products = $conn->query("select * from products ");
 <body>
 <div class="outer-container">
 
-    <div class="container col-lg-10 col-md-10 col-sm-12">
+    <div class="container col-lg-12 col-md-12 col-sm-12">
     <div class="table-responsive mb-4">
         <table class="table table-striped table-bordered table-hover" id="prod_list">
         <thead>
@@ -86,12 +86,8 @@ $products = $conn->query("select * from products ");
 <script>
 $(document).ready(function() {
     $('#prod_list').DataTable( {
-        buttons: [
-            'copy',
-            'excel',
-            'csv',
-            'pdf'
-        ]
+
+        responsive:True
     } );
 } );
 </script>
