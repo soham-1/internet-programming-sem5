@@ -9,14 +9,80 @@
     require '../models/connDB.php';
 ?>
 
-<head>
-    <!-- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmCmocdc-FcRhLg4bxhzuAca9jXJ3mGSo&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script> -->
-    
+<head>   
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/profile.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfwUiO930s5L_dYjM3L10rSKLcXciNGEE&callback=initMap&libraries=&v=weekly"></script>
+    <script>
+      function writeAddressName(latLng) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+          "location": latLng
+        },
+        function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK)
+            document.getElementById("address").innerHTML = results[0].formatted_address;
+          else
+            document.getElementById("error").innerHTML += "Unable to retrieve your address" + "<br />";
+        });
+      }
+
+      function geolocationSuccess(position) {
+        var userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        // Write the formatted address
+        writeAddressName(userLatLng);
+
+        var myOptions = {
+          zoom : 16,
+          center : userLatLng,
+          mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+        // Draw the map
+        var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+        // Place the marker
+        new google.maps.Marker({
+          map: mapObject,
+          position: userLatLng
+        });
+        // Draw a circle around the user position to have an idea of the current localization accuracy
+        var circle = new google.maps.Circle({
+          center: userLatLng,
+          radius: position.coords.accuracy,
+          map: mapObject,
+          fillColor: '#0000FF',
+          fillOpacity: 0.5,
+          strokeColor: '#0000FF',
+          strokeOpacity: 1.0
+        });
+        mapObject.fitBounds(circle.getBounds());
+      }
+
+      function geolocationError(positionError) {
+        document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
+      }
+
+      function geolocateUser() {
+        // If the browser supports the Geolocation API
+        if (navigator.geolocation)
+        {
+          var positionOptions = {
+            enableHighAccuracy: true,
+            timeout: 10 * 1000 // 10 seconds
+          };
+          navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
+        }
+        else
+          document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
+      }
+
+      window.onload = geolocateUser;
+    </script>
+    <style type="text/css">
+      #map {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
 </head>
 <?php 
 
@@ -37,9 +103,32 @@ $email; $picture; $address; $phone_no; $group;
         if (!$address) {
             $address = array_fill(1,5, "");
         }
+        $phone_no = $conn->query("Select phone_no from phone_no where user_id = " . $_SESSION['user_id']);
     }
 
     if (count($_POST)>0 && isset($_POST['email'])) {
+        $phone_no_array = array();
+        foreach ($_POST as $key => $val){
+            if (is_numeric($val) || $val=="") {
+                array_push($phone_no_array, $val);
+            }
+        }
+        $phone_flag=true;
+        if (count($phone_no_array) > 0) {
+            $result = $conn->query("select * from phone_no where user_id='{$_SESSION['user_id']}'");
+            $count1=0;
+            while($row=$result->fetch_assoc()){
+                if (is_numeric($phone_no_array[$count1]) && strlen($phone_no_array[$count1])==10) {
+                    $conn->query("update phone_no set phone_no='{$phone_no_array[$count1]}' where user_id='{$_SESSION['user_id']}' and phone_no='{$row['phone_no']}' ");
+                    $count1++;
+                } else {
+                    $phone_flag=false;
+                }
+            }
+            if (isset($phone_no_array[$count1]) && $phone_no_array[$count1]!="" && strlen($val)==10) {
+                $conn->query("insert into phone_no(phone_no, user_id) values('{$phone_no_array[$count1]}', '{$_SESSION['user_id']}')");
+            }
+        }
         if ($_FILES['profile_picture']['tmp_name'] != "") {
             $res = $conn->query("Select customer_id from customer where customer_id = " . $_SESSION['user_id'] . " limit 1");
             $imgData = addslashes(file_get_contents($_FILES['profile_picture']['tmp_name']));
@@ -54,25 +143,42 @@ $email; $picture; $address; $phone_no; $group;
                 $conn->query($sql);
             }
         }
-        
-        $conn->query("Update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
+        $email_flag=true;
+        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ) {
+            $conn->query("Update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
+        } else {
+            $email_flag=false;
+        }
 
-        echo "<script>alert('profile updated')</script>";
+        if ($phone_flag==false) {
+            echo "<script>alert('wrong phone no !')</script>";
+        } else if ($email_flag==false) {
+            echo "<script>alert('wrong email !')</script>";
+        } else {
+            echo "<script>alert('profile updated')</script>";
+        }
     }
 
     if (count($_POST)>0 && isset($_POST['building'])) {
         $res = $conn->query("Select user_id from address where user_id='{$_SESSION['user_id']}' limit 1");
-        if ($res->num_rows > 0) {
+        $details_flag=true;
+        if ($res->num_rows > 0 && is_numeric($_POST['pincode'])) {
             $sql = "update address set blg='{$_POST['building']}', lane='{$_POST['lane']}',
                     landmark='{$_POST['landmark']}', city='{$_POST['city']}', pincode='{$_POST['pincode']}' 
                     where user_id='{$_SESSION['user_id']}' ";
             $conn->query($sql);
-        } else {
+        } else if (is_numeric($_POST['pincode'])) {
             $sql = "Insert into address(user_id, blg, lane, landmark, city, pincode)"."
                     values('{$_SESSION['user_id']}', '{$_POST['building']}', '{$_POST['lane']}', '{$_POST['landmark']}', '{$_POST['city']}', '{$_POST['pincode']}')";
             $conn->query($sql);
+        } else {
+            $details_flag=false;
         }
-        echo "<script>alert('details updated')</script>";
+        if ($details_flag==false) {
+            echo "<script>alert('wrong info added')</script>";
+        } else {
+            echo "<script>alert('details updated')</script>";
+        }
     }
     get_user_details()
 ?>
@@ -90,11 +196,25 @@ $email; $picture; $address; $phone_no; $group;
                     <i class="fa fa-camera fa-3x" id="camera-icon" aria-hidden="true"></i>
                     <input type="file" name="profile_picture" id="profile-upload" hidden>
                 </div>
-                <div id="mapholder">map</div>
+                <div id="map"></div>
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
-                    <input type="text" class="detail-field values" id="email" name="email" value=<?php echo $email; ?>>
+                    <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
                 </div>
+                <?php
+                    $count=1;
+                    while ($row=$phone_no->fetch_assoc()) {
+                        echo '<div class="row">
+                                <label for="email" class="detail-field values" id="email">phone_no '.$count.'</label>
+                                <input type="text" class="detail-field " id="email-val1" name="'.(string)$count.'" value="'.$row['phone_no'].'" >
+                            </div>';
+                        $count += 1;
+                    }
+                    echo '<div class="row">
+                                <label for="email" class="detail-field values" id="email">phone_no '.$count.'</label>
+                                <input type="text" class="detail-field " id="email-val1" name="'.(string)$count.'" value="" >
+                            </div>';
+                ?>
                 <button class="bsbtn btn-success" id="form-btn" type="submit">update</button>
             </form>
         </div>

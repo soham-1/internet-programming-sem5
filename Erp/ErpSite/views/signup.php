@@ -22,16 +22,20 @@ if($numExistRows > 0){
 else{
   // $exists = false;
   if ($password == $cpassword ){
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups`) VALUES ('$username', '$hash',  '$email', '$group')";
-    $result = mysqli_query($conn,$sql);
-    if ($result){
-            $showalert = true;
+    if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+      $hash = password_hash($password, PASSWORD_DEFAULT);
+      $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups`) VALUES ('$username', '$hash',  '$email', '$group')";
+      $result = mysqli_query($conn,$sql);
+      if ($result){
+              $showalert = true;
+      } else{
+        $showerror = "Passwords do not match";
+      }
+    } else {
+      $showerror = "wrong email address";
     }
 }
-  else{
-    $showerror = "Passwords do not match";
-}
+  
 }
 }
 ?>
@@ -376,7 +380,7 @@ body {
     </style>
 <body>
 <?php
-    require 'partials/_nav.php';
+    require '_nav.php';
     require '../models/connDB.php';
     ?>
 
