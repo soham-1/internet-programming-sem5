@@ -10,6 +10,14 @@
     justify-content: center;
     margin: 10px 0 10px 0;
 }
+#clothes{
+    width: 100vw;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
 /* #category{
     align-items: center;
     margin: 10px 10px 10px 10px;

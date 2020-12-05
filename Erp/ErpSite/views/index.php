@@ -10,7 +10,7 @@
   </head>
   <body>
     <?php
-    require 'partials/_nav.php'
+    require '_nav.php'
     ?>
     <!-- <div class="container"> -->
 <!-- start -->
