@@ -87,7 +87,6 @@ $products = $conn->query("select * from products ");
 $(document).ready(function() {
     $('#prod_list').DataTable( {
 
-        responsive:True
     } );
 } );
 </script>

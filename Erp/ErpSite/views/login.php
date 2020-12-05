@@ -24,12 +24,15 @@ $exists = false;
                 $sql1 = "SELECT group_name from groups WHERE id=".$row['groups'];
                 $result1 = mysqli_query($conn, $sql1);
                 $name = mysqli_fetch_assoc($result1);
+                $sql2 = "Select * from cart where customer_id=".$row['user_id'];
+                $result2 = mysqli_query($conn, $sql2);
+                $num2 = mysqli_num_rows($result2);
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['group_id'] = $row['groups'];
                 $_SESSION['group_name'] = $name;
-                $_SESSION['cart'] = 0;
+                $_SESSION['cart'] = $num2;
 
                 header("location: welcome.php");
               }

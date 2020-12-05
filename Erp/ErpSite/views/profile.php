@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
     $dir = explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to user folder
     $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 ?>
@@ -9,6 +9,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        width: 30%;
+        /* The width is the width of the web page */
+      }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- <script
@@ -21,7 +28,7 @@
     <link rel="stylesheet" href="css/profile.css">
     <title>ERP</title>
 </head>
-<?php 
+<?php
 $email; $picture; $address; $phone_no; $shop;
 
     function get_user_details() {
@@ -30,7 +37,7 @@ $email; $picture; $address; $phone_no; $shop;
 
         $shop_exists = $conn->query("select * from shop where shop_owner='{$_SESSION['user_id']}' limit 1");
         if ($shop_exists->num_rows>0) {
-            $shop = $shop_exists->fetch_row();  
+            $shop = $shop_exists->fetch_row();
         } else {
             $shop = array_fill(1,5,"");
         }
@@ -82,7 +89,7 @@ $email; $picture; $address; $phone_no; $shop;
         $res = $conn->query("select * from address where user_id='{$_SESSION['user_id']}'");
         if ($res->num_rows > 0) {
             $sql = "update address set blg='{$_POST['building']}', lane='{$_POST['lane']}',
-                    landmark='{$_POST['landmark']}', city='{$_POST['city']}', pincode='{$_POST['pincode']}' 
+                    landmark='{$_POST['landmark']}', city='{$_POST['city']}', pincode='{$_POST['pincode']}'
                     where user_id='{$_SESSION['user_id']}' ";
             $conn->query($sql);
         } else {
@@ -112,6 +119,7 @@ $email; $picture; $address; $phone_no; $shop;
                     <div class="row" style="visibility:hidden;"></div>
                 </div>
                 <!-- <div id="mapholder">map</div> -->
+
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
                     <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
@@ -129,7 +137,7 @@ $email; $picture; $address; $phone_no; $shop;
                 <button class="bsbtn btn-success" id="form-btn" type="submit">update</button>
             </form>
         </div>
-
+        <div id="map"></div>
         <div class="form-section col-lg-7 col-md-6 col-sm-12">
             <form name="updateForm" action="profile.php" method="post" id="main-form">
                 <div class="details">
@@ -172,14 +180,46 @@ $email; $picture; $address; $phone_no; $shop;
                         <label for="category" class="detail-field">pincode</label>
                         <input type="text" class="detail-field values" id="pincode" name="pincode" value="<?php echo $address[5]; ?>" required >
                     </div>
+                    <div class="row">
+                        <label for="category" class="detail-field">Latitude</label>
+                        <input type="text" class="detail-field values" id="pincode" name="pincode" value="<?php echo $address[6]; ?>" required >
+                    </div>
+                    <div class="row">
+                        <label for="category" class="detail-field">Longitude</label>
+                        <input type="text" class="detail-field values" id="pincode" name="pincode" value="<?php echo $address[7]; ?>" required >
+                    </div>
                 </div>
                 <button class="bsbtn btn-success" id="form-btn" type="submit">save</button>
             </form>
         </div>
     </div>
 
-    
+
 </body>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRtriDLo0bnzuCz9xL5wQmclzUTEeh69Y&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: <?php echo $address[6]; ?>,lng: <?php echo $address[7]; ?> };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+      }
+    </script>
+
+
 
 <script type="text/javascript">
         //  function showLocation(position) {
