@@ -60,8 +60,6 @@
 </head>
 <body>
 <?php
-$dir = '/' . explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to ErpSite folder
-$basedir = '/' . explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
   $loggedin = true;
 }

@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-    $dir = explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to user folder
-    $basedir = explode('htdocs\\', dirname($dir))[0]; // refers to Erp folder
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
