@@ -271,3 +271,10 @@ footer.second p{
     font-size: 180%;
   }
 }
+nav ul li a span {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: transform 0.4s;

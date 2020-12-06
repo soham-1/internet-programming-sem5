@@ -12,19 +12,20 @@
     <link rel="stylesheet" href="css/welcome_content.css">
 </head>
 <body>
+<div class="container">
  <section class="inner-wrapper">
    <article id="tablet">
      <img src="https://res.cloudinary.com/dgpmuegqe/image/upload/v1492571257/hand_ipad_vr0pfu.png">
    </article>
    <aside id="tablet2">
-     <h2>Mobile.Tablet.Desktop.</h2>
-     <p>A clean HTML layout and CSS stylesheet making for a great responsive framework to design around that includes a responsive drop down navigation menu, image slider, contact form and ‘scroll to the top’ jQuery plugin.jQuery plugin.that includes a responsive drop down navigation menu, image slider, contact form and ‘scroll to the top’ jQuery plugin.</p>
+     <h2>simple and clean UI</h2>
+     <p>the pages are very clean and easy for new commers to understand.Users won't have any problem understanding it</p>
    </aside>
  </section>
  <section class="inner-wrapper-2">
    <article id="mobile">
      <h2>Accross Each Device</h2>
-     <p>A clean HTML layout and CSS stylesheet making for a great responsive framework to design around that includes a responsive drop down navigation menu, image slider, contact form and ‘scroll to the top’ jQuery plugin.that includes a responsive drop down navigation menu, image slider, contact form and ‘scroll to the top’ jQuery plugin.</p>
+     <p>navigate seamlessly thorugh all pages on any device. Go through all products and select your favourite shop</p>
    </article>
    <aside class="hand-mobile">
      <img src="https://res.cloudinary.com/dgpmuegqe/image/upload/v1492571257/hand_mobile_stt5sh.png">
@@ -36,7 +37,7 @@
     </article>
     <aside id="desktop">
       <h2 >Desktop</h2>
-      <p>Also included with the Template is the Template Customization Guide with five special video lessons showing you how to get professional website pictures & how to edit them to fit the template, how to make a custom website logo, how to upload your HTML website template to the internet and an HTML website building tools video!</p>
+      <p>keep cheking sheltered-chamber for new updates</p>
     </aside>
   </section>
   <!--end of two half section-->
@@ -68,5 +69,6 @@
       <li><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>
     </ul>
   </footer>
+</div>
 </body>
 </html>
