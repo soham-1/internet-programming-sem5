@@ -16,12 +16,11 @@ while ($row=$cart_items->fetch_assoc()) {
 $sql3 = "select * from payment_details where payment_id='{$row['payment_id']}'";
 array_push($pay_details,$conn->query($sql3)->fetch_row());
 array_push($payment,$row);
-
+$shop_id = $row['shop_id'];
 
 }
 
 
-$shop_id = $row['shop_id'];
 
 $sql5 = "SELECT * from shop WHERE shop_id='{$shop_id}'";
 $result5 = mysqli_query($conn, $sql5);

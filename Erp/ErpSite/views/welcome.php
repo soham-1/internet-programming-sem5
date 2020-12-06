@@ -150,7 +150,6 @@
 </ul>
 </li>
 <li><a href="inventory.php">Inventory Management</a></li>
-<li><a href="#">Todays Booking</a></li>
 <li>
   <a href="#" class="serv-btn">Sales Report
     <span class="fas fa-caret-down second"></span>
@@ -168,7 +167,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 
   <div class="topnav">
   <div class="topnav-right">
-    <a href="shop_info.php">Customer info</a>
+    <a href="welcome_content.php">home</a>
     <div class="dropdown">
     <button class="dropbtn"><i class="fas fa-user"></i>
       <i class="fa fa-caret-down"></i>
@@ -202,9 +201,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 </ul>
 </li>
 <li><a href="#"></a></li>
-<li><a href="#">Todays Booking</a></li>
 <li><a href="shopping.php">Shop by Category</a></li>
-<li><a href="#">Locate Shops</a></li>
 <li><a href="contact_us.php">Feedback</a></li>
 </ul>
 </nav>';}
