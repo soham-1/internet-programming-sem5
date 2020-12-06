@@ -62,7 +62,7 @@
                 <td>' . $row['balance'] .'</td>';
                 if ($_GET['user']=="shop") {
                     echo '<td><button type="submit" class="bsbtn btn-outline-pink">Clear payment</button>
-                            <button class="bsbtn btn-danger">send reminder</button></td>';
+                            <button class="bsbtn btn-primary">send reminder</button></td>';
                 }
                 echo '</form></tr>';
             }
