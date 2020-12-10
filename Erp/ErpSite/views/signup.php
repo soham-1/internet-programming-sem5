@@ -15,9 +15,14 @@ $group = $_POST['group'];
 $existSql = "Select * from `user` where username='$username'";
 $result = mysqli_query($conn, $existSql);
 $numExistRows = mysqli_num_rows($result);
+$emailexist = $conn->query("select * from user where email='$email' limit 1");
+
 if($numExistRows > 0){
   // $exists = true;9*
   $showerror ="Username already exists.";
+}
+else if ($emailexist->num_rows>0) {
+  $showerror ="email already exists.";
 }
 else{
   // $exists = false;
@@ -27,15 +32,15 @@ else{
       $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
       $result = mysqli_query($conn,$sql);
       if ($result){
-              $showalert = true;
-      } else{
-        $showerror = "Passwords do not match";
+        $showalert = true;
       }
     } else {
       $showerror = "wrong email address";
     }
-}
-  
+  } else{
+    $showerror = "Passwords do not match";
+  }
+
 }
 }
 ?>
@@ -70,6 +75,7 @@ body {
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
+  margin-top: 20px;
 
 }
 /* .login-box label{
