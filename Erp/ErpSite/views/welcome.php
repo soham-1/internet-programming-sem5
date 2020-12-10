@@ -131,15 +131,7 @@
 <a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="#">Dashboard</a></li>
-<li>
-          <a href="#" class="feat-btn">Product
-            <span class="fas fa-caret-down first"></span>
-          </a>
-          <ul class="feat-show">
 <li><a href="add_inventory.php">Add Product</a></li>
-<li><a href="view_product.php">View Product</a></li>
-</ul>
-</li>
 <li>
           <a href="#" class="serv-btn">Payment
             <span class="fas fa-caret-down second"></span>
