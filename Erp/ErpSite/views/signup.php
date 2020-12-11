@@ -5,10 +5,8 @@
 <?php
 $showalert = false;
 $showerror = false;
-error_log('testing errors before');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-error_log('testing errors after');
 include '../models/connDB.php';
 
 $username = $_POST['username'];
@@ -33,10 +31,12 @@ else if ($emailexist->num_rows>0) {
 else{
   // $exists = false;
   if ($password == $cpassword ){
+    error_log('passwords match');
     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
       $result = mysqli_query($conn,$sql);
+      error_log('after insert' . result);
       if ($result){
         $showalert = true;
       }
