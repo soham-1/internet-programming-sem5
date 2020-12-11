@@ -1,8 +1,14 @@
 <?php
+    require '_nav.php';
+    require '../models/connDB.php';
+    ?>
+<?php
 $showalert = false;
 $showerror = false;
+error_log('testing errors before');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-error_log('testing errors');
+error_log('testing errors after');
 include '../models/connDB.php';
 
 $username = $_POST['username'];
@@ -385,10 +391,7 @@ body {
 } */
     </style>
 <body>
-<?php
-    require '_nav.php';
-    require '../models/connDB.php';
-    ?>
+
 
     <?php
    if($showalert){
