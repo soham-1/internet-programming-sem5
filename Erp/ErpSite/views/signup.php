@@ -2,7 +2,7 @@
 $showalert = false;
 $showerror = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+error_log('testing errors');
 include '../models/connDB.php';
 
 $username = $_POST['username'];
