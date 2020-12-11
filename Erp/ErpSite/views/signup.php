@@ -37,6 +37,8 @@ else{
       $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
       $result = mysqli_query($conn,$sql);
       error_log('after insert' . $result);
+      error_log($conn->affected_rows);
+      error_log($conn->error);
       if ($result){
         $showalert = true;
         error_log('yes');
