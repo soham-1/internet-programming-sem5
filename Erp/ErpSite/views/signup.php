@@ -36,9 +36,10 @@ else{
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
       $result = mysqli_query($conn,$sql);
-      error_log('after insert' . result);
+      error_log('after insert' . $result);
       if ($result){
         $showalert = true;
+        error_log('yes');
       }
     } else {
       $showerror = "wrong email address";
