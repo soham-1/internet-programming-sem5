@@ -25,7 +25,7 @@ $cust_id = $_SESSION['user_id'];
 $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
 // select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
 while ($row=$cart_items->fetch_assoc()) {
-    $sql = "select i.price, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
+    $sql = "select i.price, i.discount, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
     $res = $conn->query($sql);
 }
 // select i.price, p.image, p.name, c.qty from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id=$shop_id;
@@ -78,23 +78,36 @@ if(!empty($_GET["action"])) {
 <?php
 $total_quantity = 0;
 $total_price = 0;
+if (isset($res)) {
     while ($row=$res->fetch_assoc()){
+        $discount = $row['discount'];
+        $discounted_price = (int)$row["price"] - ((int)$row["price"]*$discount/100);
+        $total_price1 = $discounted_price*(int)$row["qty"];
 
 		?>
-				<tr>
-                <td><?php echo $row["name"]; ?> </td>
-				<td><?php echo '<img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" class="cart-item-image" style="width:10%"/>' ?></td>
+            <tr>
+            <td><?php echo $row["name"]; ?> </td>
+            <td><?php echo '<img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" class="cart-item-image" style="width:10%"/>' ?></td>
 
-				<td><?php echo $row["product_id"] ?></td>
-				<td><?php echo $row["qty"]; ?></td>
-				<td><?php echo "RS. ".$row["price"]; ?></td>
-				<td><?php $total_sing=number_format($row["price"]*$row["qty"],2); echo "Rs. ". number_format($row["price"]*$row["qty"],2); ?></td>
-				<td><a href="cart.php?action=remove&code=<?php echo $row["product_id"]  ?>" class="btnRemoveAction"><i class="fas fa-trash"></i></a></td>
-				</tr>
-				<?php
-				$total_quantity += $row["qty"];
-				$total_price += $total_sing;
-		}
+            <td><?php echo $row["product_id"] ?></td>
+            <td><?php echo $row["qty"]; ?></td>
+            <td><?php echo "RS. ".$row["price"]; ?></td>
+            <td><?php $total_sing=$total_price1; echo "Rs. ". number_format($total_price1,2); ?></td>
+            <td><a href="cart.php?action=remove&code=<?php echo $row["product_id"]  ?>" class="btnRemoveAction"><i class="fas fa-trash"></i></a></td>
+            </tr>
+            <?php
+            $total_quantity += $row["qty"];
+            $total_price += $total_sing;
+        }
+    } else {
+        echo '<td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>';
+    }
 		?>
 
 <tr>

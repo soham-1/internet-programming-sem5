@@ -112,7 +112,7 @@ $email; $picture; $address; $phone_no; $shop;
         $phone_no = $conn->query("Select phone_no from phone_no where user_id = " . $_SESSION['user_id']);
     }
 
-    if (count($_POST)>0 && isset($_POST['email'])) {
+    if (count($_POST)>0 && isset($_POST['new_email'])) {
         $exist = $conn->query("Select shop_id from shop where shop_owner = " . $_SESSION['user_id'] . " limit 1");
         if ($exist->num_rows<=0) {
             echo "<script>alert('first fill in the shop details !')</script>";
@@ -159,16 +159,24 @@ $email; $picture; $address; $phone_no; $shop;
             } catch (Exception $e) {
                 echo 'alert("we couldnt update your profile pic, please try again")' ;
             }
+            $old_email = $_POST['old_email'];
+            $new_email = $_POST['new_email'];
+            $email_exist = false;
             $email_flag=true;
-            if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ) {
-                $conn->query("Update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
-            } else {
-                $email_flag=false;
+            if ($old_email!=$new_email) {
+                $email_exist = $conn->query("select email from user where email='{$_POST['new_email']}'");
+                if (filter_var($_POST['new_email'], FILTER_VALIDATE_EMAIL) && $email_exist->num_rows<=0) {
+                    $conn->query("Update user set email='{$_POST['new_email']}' where user_id='{$_SESSION['user_id']}'");
+                } else {
+                    $email_flag=false;
+                }
             }
             if ($phone_flag==false) {
                 echo "<script>alert('wrong phone no !')</script>";
             } else if ($phone_flag1==false) {
                 echo "<script>alert('phone no already registered')</script>";
+            } else if ($email_exist==true && $email_exist->num_rows>0) {
+                echo "<script>alert('email already registered')</script>";
             } else if ($email_flag==false) {
                 echo "<script>alert('wrong email !')</script>";
             } else {
@@ -232,7 +240,8 @@ $email; $picture; $address; $phone_no; $shop;
                 <div id="map"></div>
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
-                    <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
+                    <input type="text" class="detail-field values" id="email-val" name="new_email" value=<?php echo $email; ?>>
+                    <input type="hidden" class="detail-field values" id="email-val" name="old_email" value=<?php echo $email; ?>>
                 </div>
                 <?php
                     $count=1;

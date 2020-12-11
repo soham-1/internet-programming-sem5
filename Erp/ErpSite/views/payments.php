@@ -42,7 +42,13 @@
                 <th>amount</th>
                 <th>balance</th>
                 <th>method</th>
-                <th>notes</th>
+            <?php
+            if ($_GET['user']=="shop") {
+                echo '<th>notes</th>';
+            }
+                
+            ?>
+                <!-- <th>notes</th> -->
             </tr>
         </thead>
         <tbody>
@@ -64,9 +70,9 @@
                         <td>' . $row1['qty'] .'</td>
                         <td>' . $total_price .'</td>
                         <td>' . $row['balance'] .'</td>
-                        <td>' . $row['payment_method'] .'</td>
-                        <td>' . $row['notes'] .'</td>
-                        </tr>';
+                        <td>' . $row['payment_method'] .'</td>';
+                        if ($_GET['user']=="shop") echo '<td>' . $row['notes'] .'</td>';
+                        '</tr>';
                 }
             }
             ?>

@@ -86,12 +86,10 @@
 </head>
 <?php 
 
-$email; $picture; $address; $phone_no; $group;
+$email; $picture; $address; $phone_no;
 
     function get_user_details() {
-        global $conn, $picture, $address, $phone_no, $group, $email;
-        $sql = "Select group_name from groups where id = " . $_SESSION['group_id'];
-        $group = $conn->query($sql)->fetch_row();
+        global $conn, $picture, $address, $phone_no, $email;
         $picture = $conn->query("Select picture from customer where customer_id = " . $_SESSION['user_id'] . " limit 1")->fetch_row();
         $email = $conn->query("Select email from user where user_id = " . $_SESSION['user_id'] . " limit 1")->fetch_row()[0];
         $address = $conn->query("Select * from address where user_id = " . $_SESSION['user_id'] . " limit 1")->fetch_row();
@@ -106,7 +104,7 @@ $email; $picture; $address; $phone_no; $group;
         $phone_no = $conn->query("Select phone_no from phone_no where user_id = " . $_SESSION['user_id']);
     }
 
-    if (count($_POST)>0 && isset($_POST['email'])) {
+    if (count($_POST)>0 && isset($_POST['new_email'])) {
         $phone_no_array = array();
         foreach ($_POST as $key => $val){
             if (is_numeric($val) || $val=="") {
@@ -114,6 +112,7 @@ $email; $picture; $address; $phone_no; $group;
             }
         }
         $phone_flag=true;
+        $phone_flag1=true;
         if (count($phone_no_array) > 0) {
             $result = $conn->query("select * from phone_no where user_id='{$_SESSION['user_id']}'");
             $count1=0;
@@ -126,7 +125,8 @@ $email; $picture; $address; $phone_no; $group;
                 }
             }
             if (isset($phone_no_array[$count1]) && $phone_no_array[$count1]!="" && strlen($val)==10) {
-                $conn->query("insert into phone_no(phone_no, user_id) values('{$phone_no_array[$count1]}', '{$_SESSION['user_id']}')");
+                $res = $conn->query("insert into phone_no(phone_no, user_id) values('{$phone_no_array[$count1]}', '{$_SESSION['user_id']}')");
+                if ($res==false) $phone_flag1=false;
             }
         }
         if ($_FILES['profile_picture']['tmp_name'] != "") {
@@ -143,15 +143,24 @@ $email; $picture; $address; $phone_no; $group;
                 $conn->query($sql);
             }
         }
+        $old_email = $_POST['old_email'];
+        $new_email = $_POST['new_email'];
+        $email_exist = false;
         $email_flag=true;
-        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ) {
-            $conn->query("Update user set email='{$_POST['email']}' where user_id='{$_SESSION['user_id']}'");
-        } else {
-            $email_flag=false;
+        if ($old_email!=$new_email) {
+            $email_exist = $conn->query("select email from user where email='{$_POST['new_email']}'");
+            if (filter_var($_POST['new_email'], FILTER_VALIDATE_EMAIL) && $email_exist->num_rows<=0) {
+                $conn->query("Update user set email='{$_POST['new_email']}' where user_id='{$_SESSION['user_id']}'");
+            } else {
+                $email_flag=false;
+            }
         }
-
         if ($phone_flag==false) {
             echo "<script>alert('wrong phone no !')</script>";
+        } else if ($phone_flag1==false) {
+            echo "<script>alert('phone no already registered')</script>";
+        } else if ($email_exist==true && $email_exist->num_rows>0) {
+            echo "<script>alert('email already registered')</script>";
         } else if ($email_flag==false) {
             echo "<script>alert('wrong email !')</script>";
         } else {
@@ -199,7 +208,8 @@ $email; $picture; $address; $phone_no; $group;
                 <div id="map"></div>
                 <div class="row">
                     <label for="email" class="detail-field values" id="email">email id</label>
-                    <input type="text" class="detail-field values" id="email-val" name="email" value=<?php echo $email; ?>>
+                    <input type="text" class="detail-field values" id="email-val" name="new_email" value=<?php echo $email; ?>>
+                    <input type="hidden" class="detail-field values" id="email-val" name="old_email" value=<?php echo $email; ?>>
                 </div>
                 <?php
                     $count=1;
