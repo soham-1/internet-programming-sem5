@@ -20,7 +20,7 @@ $products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' 
 
 if (count($_GET)>0) {
     if (is_numeric($_GET['qty']) && is_numeric($_GET['discount']) && $_GET['discount']>=0 && $_GET['qty']>=0){
-        $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
+        $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}', price='{$_GET['price']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
     } else {
         echo '<script> alert("wrong inputs") </script>';
     }
@@ -38,6 +38,7 @@ if (count($_GET)>0) {
                 <th>Product</th>
                 <th>Description</th>
                 <th>Category</th>
+                <th>price</th>
                 <th>Qty</th>
                 <th>Discount</th>
                 <th>Actions</th>
@@ -55,6 +56,7 @@ if (count($_GET)>0) {
                             <td>'. $product_name[0] .' <br><input type="text" name="product_id" value="'. $product_id .'" style="visibility:hidden"> </td>
                             <td>'. $row['description'] .' <br> <input type="text" value="'. $row['description'] .'" name="description" id="'. $product_id .'description" style="visibility:hidden"></td>
                             <td>'. $product_name[1] .'</td>
+                            <td>'. $row['price'] .' <br> <input type="text" value="'. $row['price'] .'" name="price" id="'. $product_id .'price" style="visibility:hidden"></td>
                             <td>'. $row['qty'] .' <br> <input type="text" value="'. $row['qty'] .'" name="qty" id="'. $product_id .'qty" style="visibility:hidden"></td>
                             <td>'. $row['discount'] .' <br> <input type="text" value="'. $row['discount'] .'" name="discount" id="'. $product_id .'discount" style="visibility:hidden"></td>
                             <td> <span id="'. $product_id .'" class="edit-button"><i class="fas fa-edit"></i> Edit</span> <span class="cancel-button" style="visibility:hidden" id="'. $product_id .'cancel"><i class="fas fa-times"></i> Cancel</span> <br> <button class="bsbtn btn-primary" id="'. $product_id .'save" style="visibility:hidden">save</buton></td>
@@ -64,6 +66,7 @@ if (count($_GET)>0) {
                 }
             } else {
                 echo '<tr>
+                        <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
@@ -92,11 +95,13 @@ $(window).resize(function () {
             var id = this.id;
             var desc = id + "description";
             var qty = id + "qty";
+            var price = id + "price";
             var discount = id + "discount";
             var save = id + "save";
             var cancel = id + "cancel"
             document.getElementById(desc).style.visibility = "visible";
             document.getElementById(qty).style.visibility = "visible";
+            document.getElementById(price).style.visibility = "visible";
             document.getElementById(discount).style.visibility = "visible";
             document.getElementById(save).style.visibility = "visible";
             document.getElementById(cancel).style.visibility = "visible";
@@ -105,11 +110,13 @@ $(window).resize(function () {
             var id = this.id[0];
             var desc = id + "description";
             var qty = id + "qty";
+            var price = id + "price";
             var discount = id + "discount";
             var save = id + "save";
             var cancel = id + "cancel"
             document.getElementById(desc).style.visibility = "hidden";
             document.getElementById(qty).style.visibility = "hidden";
+            document.getElementById(price).style.visibility = "hidden";
             document.getElementById(discount).style.visibility = "hidden";
             document.getElementById(save).style.visibility = "hidden";
             document.getElementById(cancel).style.visibility = "hidden";
