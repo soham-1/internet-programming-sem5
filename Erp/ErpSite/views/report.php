@@ -17,6 +17,7 @@
                 array_push($dataPoints, array("y"=> $row["amount"], "label" => $row["pay_date"]));
             }
         } else if ($_GET['type']=='category') {
+            // gets the category and price of sold items for a particular shops
             $sql = "select i.price, p.category, pd.qty from payments py inner join payment_details pd on py.payment_id=pd.payment_id inner join products p on pd.prod_id=p.product_id inner join inventory i on p.product_id=i.prod_id where py.shop_id='{$shop_id}'";
             if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
                 $sql .= " and py.pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}'";
@@ -40,6 +41,7 @@
 </head>
 <script>
 window.onload = function () {
+    // get url parameter "type"
 const queryString = window.location.search;
 console.log(queryString);
 const urlParams = new URLSearchParams(queryString);

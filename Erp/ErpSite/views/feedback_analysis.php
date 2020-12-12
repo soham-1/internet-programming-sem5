@@ -11,9 +11,10 @@
     $negative = 0;
     $negative_array = ["bad", "worst", "ridiculous"];
     $positive_array = ["good", "better", "best", "excellent", "nice"];
-    while ($row = $feedbacks->fetch_assoc()) {
+    while ($row = $feedbacks->fetch_assoc()) { // gets all feedback into an array
         array_push($message_array, $row['message']);
     }
+    // for each message, checks if any positive word is present in sentence.
     foreach ($message_array as $message) {
         foreach ($positive_array as $positive_word) {
             if (strpos($message, $positive_word)!==false) {
@@ -30,6 +31,7 @@
             }
         }
     }
+    // total count of positive or negative statements
     array_push($dataPoints, array("y"=> $positive, "label" => "positive"));
     array_push($dataPoints, array("y"=> $negative, "label" => "negative"));
 ?>
