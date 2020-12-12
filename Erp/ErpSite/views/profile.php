@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- profile page for shops -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +93,7 @@
 <?php
 $email; $picture; $address; $phone_no; $shop;
 
-    function get_user_details() {
+    function get_user_details() { // sets the profile details
         global $conn, $picture, $address, $phone_no, $shop, $email;
         $email = $conn->query("Select email from user where user_id = " . $_SESSION['user_id'] . " limit 1")->fetch_row()[0];
 
@@ -112,19 +112,19 @@ $email; $picture; $address; $phone_no; $shop;
         $phone_no = $conn->query("Select phone_no from phone_no where user_id = " . $_SESSION['user_id']);
     }
 
-    if (count($_POST)>0 && isset($_POST['new_email'])) {
+    if (count($_POST)>0 && isset($_POST['new_email'])) { // checks if side form is submitted
         $exist = $conn->query("Select shop_id from shop where shop_owner = " . $_SESSION['user_id'] . " limit 1");
-        if ($exist->num_rows<=0) {
+        if ($exist->num_rows<=0) {  // checks if the shop name, etc are set or not, if not then doesn't allow to set profile picture
             echo "<script>alert('first fill in the shop details !')</script>";
         } else {
             $phone_no_array = array();
             foreach ($_POST as $key => $val){
                 if (is_numeric($val) || $val=="") {
-                    array_push($phone_no_array, $val);
+                    array_push($phone_no_array, $val); // gets all phone nos. from POST into variable
                 }
             }
-            $phone_flag=true;
-            $phone_flag1=true;
+            $phone_flag=true; // check phone no. validity
+            $phone_flag1=true; // checks if phone no is already registered into database
             if (count($phone_no_array) > 0) {
                 $result = $conn->query("select * from phone_no where user_id='{$_SESSION['user_id']}'");
                 $count1=0;
@@ -143,7 +143,7 @@ $email; $picture; $address; $phone_no; $shop;
             }
             try{
                 if ($_FILES['profile_picture']['tmp_name'] != "") {
-                    $imgData = addslashes(file_get_contents($_FILES['profile_picture']['tmp_name']));
+                    $imgData = addslashes(file_get_contents($_FILES['profile_picture']['tmp_name'])); // gets image data into binary form
                     $imageProperties = getimageSize($_FILES['profile_picture']['tmp_name']);
                     $res = $conn->query("Select shop_id from shop where shop_owner = " . $_SESSION['user_id'] . " limit 1");
                     if ($res->num_rows > 0) {
@@ -162,7 +162,7 @@ $email; $picture; $address; $phone_no; $shop;
             $old_email = $_POST['old_email'];
             $new_email = $_POST['new_email'];
             $email_exist = false;
-            $email_flag=true;
+            $email_flag=true; // checks email validity
             if ($old_email!=$new_email) {
                 $email_exist = $conn->query("select email from user where email='{$_POST['new_email']}'");
                 if (filter_var($_POST['new_email'], FILTER_VALIDATE_EMAIL) && $email_exist->num_rows<=0) {
@@ -184,7 +184,7 @@ $email; $picture; $address; $phone_no; $shop;
             }
         }
     }
-    if (count($_POST)>0 && isset($_POST['building'])) {
+    if (count($_POST)>0 && isset($_POST['building'])) { // checks if main form is submitted
         $shop_exist = $conn->query("select shop_name from shop where shop_owner='{$_SESSION['user_id']}'");
         $name_exist = $conn->query("select shop_name from shop where shop_name='{$_POST['shop_name']}'");
         $reg_exist = $conn->query("select shop_name from shop where reg_no='{$_POST['reg_no']}'");

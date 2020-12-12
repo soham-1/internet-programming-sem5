@@ -13,7 +13,6 @@
 </head>
 
 <?php
-// $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' ")->fetch_row();
     $products = $conn->query("
     SELECT * FROM products
     WHERE product_id IN
@@ -156,6 +155,7 @@
 </div>
 </body>
 <script>
+// script for slide show
     let count = 0;
     let visible_items;
     let num_slides;

@@ -23,25 +23,10 @@
 <?php
 $cust_id = $_SESSION['user_id'];
 $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
-// select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
 while ($row=$cart_items->fetch_assoc()) {
     $sql = "select i.price, i.discount, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
     $res = $conn->query($sql);
 }
-// select i.price, p.image, p.name, c.qty from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id=$shop_id;
-// $row = $cart_items->fetch_assoc();
-// $prod = $conn->query("select * from inventory where prod_id='{$row['prod_id']}' AND shop_id='{$row['shop_id']}' ");
-// $row = $prod->fetch_assoc();
-// $prod_view = $conn->query("select * from products where product_id='{$_row['prod_id']}'");
-// $prod_img = $prod_view->fetch_assoc();
-//     $price = $conn->query("select * from inventory where prod_id='{$_GET['product_id']}' ");
-//     $price_array = array();
-//     $shop_names = array();
-//     $shop_ids = array();
-//     while ($row = $price->fetch_assoc()) {
-//         array_push($shop_names,$conn->query("select * from shop where shop_id='{$row['shop_id']}'")->fetch_row()[0]);
-//         array_push($price_array, $row);
-//     }
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         //code for adding product in cart

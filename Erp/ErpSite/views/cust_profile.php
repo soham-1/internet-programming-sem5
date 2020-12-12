@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- profile page for customer, same logic used as profile.php -->
 <?php 
-    $dir = explode('htdocs\\', dirname(dirname(__FILE__)), 2)[1]; // refers to user folder
-    $basedir = realpath($_SERVER['DOCUMENT_ROOT']) . '/Erp/Erp'; // refers to Erp folder
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';

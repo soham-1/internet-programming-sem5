@@ -2,6 +2,7 @@
 //this is a DOMComment
 $login = false;
 $showerror = false;
+// if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) header("location: welcome_content.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 include '../models/connDB.php';
