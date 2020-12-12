@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $conn->query("update inventory set qty=$updated_qty where shop_id=$shop_id");
   }
   $conn->query("delete from cart where customer_id=$cust_id");
+  $_SESSION['cart'] = 0;
 }
 $sql5 = "SELECT * from shop WHERE shop_id='{$shop_id}'";
 $result5 = mysqli_query($conn, $sql5);

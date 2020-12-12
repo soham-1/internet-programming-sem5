@@ -31,7 +31,6 @@ else if ($emailexist->num_rows>0) {
 else{
   // $exists = false;
   if ($password == $cpassword ){
-    error_log('passwords match');
     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $sql = "INSERT INTO `user` ( `username`, `password`, `email`, `groups1`) VALUES ('$username', '$hash',  '$email', '$group')";
@@ -41,7 +40,6 @@ else{
       error_log($conn->error);
       if ($result){
         $showalert = true;
-        error_log('yes');
       }
     } else {
       $showerror = "wrong email address";
