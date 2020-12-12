@@ -31,7 +31,6 @@
     <table id="table_id" class="display">
         <thead>
             <tr>
-                <!-- <th>product</th> -->
                 <th>shop</th>
                 <th>description</th>
                 <th>Avail qty</th>
@@ -41,10 +40,7 @@
         </thead>
         <tbody>
         <?php
-        // echo '<a href="shop_prod_view.php?product_id=1&shop_id=1"> '.$product_id.'</a>';
             for ($i=0; $i< count($shop_names); $i++) {
-                // $product_id = $row['prod_id'];
-                // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                 echo '<tr>
                 <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $shop_names[$i][2] .'</a></td>
                 <td><a href="shop_prod_view.php?product_id='. $product_id . '&shop_id='. $shop_names[$i][0] .' ">' . $price_array[$i]['description'] .'</a></td>

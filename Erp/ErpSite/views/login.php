@@ -2,7 +2,12 @@
 //this is a DOMComment
 $login = false;
 $showerror = false;
-// if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) header("location: welcome_content.php");
+session_start();
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) header("location: welcome_content.php");
+else {
+  session_unset();
+  session_destroy();
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 include '../models/connDB.php';
@@ -19,9 +24,6 @@ $exists = false;
               if(password_verify($password,$row['password'])){
                 $login = true;
                 session_start();
-                // $sql3 = "Select groups from user where username=".$username;
-                // $group_id = mysqli_query($conn, $sql3);
-                // $groupid =mysqli_fetch_array($group_id);
                 $sql1 = "SELECT group_name from groups1 WHERE id=".$row['groups1'];
                 $result1 = mysqli_query($conn, $sql1);
                 $name = mysqli_fetch_assoc($result1);

@@ -54,7 +54,6 @@ $address = mysqli_fetch_assoc($result6);
         <table id="table_id" class="display">
         <thead>
             <tr>
-                <!-- <th>product</th> -->
                 <th>Order id</th>
                 <th>Shop id</th>
                 <th>Order Date</th>
@@ -65,10 +64,7 @@ $address = mysqli_fetch_assoc($result6);
         </thead>
         <tbody>
         <?php
-        // echo '<a href="shop_prod_view.php?product_id=1&shop_id=1"> '.$product_id.'</a>';
             for ($i=0; $i< count($payment); $i++) {
-                // $product_id = $row['prod_id'];
-                // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                 echo '<tr>
                 <td>' . $payment[$i]['payment_id'] .'</td>
                 <td>' . $payment[$i]['shop_id'] .'</td>

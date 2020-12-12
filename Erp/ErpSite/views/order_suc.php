@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $balance = $amount;
   $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
-  // select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
   while ($row=$cart_items->fetch_assoc()) {
     $sql3 = "select i.price, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
     $res = $conn->query($sql3);

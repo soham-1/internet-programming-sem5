@@ -45,8 +45,6 @@ $products = $conn->query("select * from products ");
             <?php
             if ($products->num_rows > 0) {
                 while ($row=$products->fetch_assoc()) {
-                    // $product_id = $row['product_id'];
-                    // $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                     echo '<tr>
                             <td>'. $row['name'] .'</td>
                             <td>'. $row['category'] .'</td>
