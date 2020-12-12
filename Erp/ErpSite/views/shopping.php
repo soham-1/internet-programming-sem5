@@ -58,14 +58,14 @@
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>3</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
               <div class="card col-lg-2 col-md-4 col-sm-6">
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>4</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
 
@@ -73,28 +73,28 @@
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>5</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
               <div class="card col-lg-2 col-md-4 col-sm-6">
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>6</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
               <div class="card col-lg-2 col-md-4 col-sm-6">
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>7</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
               <div class="card col-lg-2 col-md-4 col-sm-6">
                 <img src="css/defaultC.png" alt="Avatar" style="width:100%">
                 <div class="text-container">
                     <h4><b>8</b></h4>
-                    <p>Architect & Engineer</p>
+                    <p>dummy values</p>
                 </div>
               </div>
               <!-- <span class="angle"><i class="fas fa-angle-right"></i></span> -->

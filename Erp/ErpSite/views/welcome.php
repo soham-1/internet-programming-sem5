@@ -130,7 +130,6 @@
 <nav class="sidebar">
 <a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
 <ul>
-<li class="active"><a href="#">Dashboard</a></li>
 <li><a href="add_inventory.php">Add Product</a></li>
 <li>
           <a href="#" class="serv-btn">Payment
@@ -179,7 +178,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
       <span class="fas fa-bars"></span>
     </div>
 <nav class="sidebar">
-<a href="welcome.php"><div class="text">LOCCO ERP</div></a>
+<a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="my_orders.php">My Orders</a></li>
 
@@ -223,29 +222,24 @@ else{
 <nav class="sidebar">
 <a href="welcome.php"><div class="text">LOCCO ERP</div></a>
 <ul>
-<li class="active"><a href="#">Dashboard</a></li>
 <li>
-          <a href="#" class="feat-btn">Product
+          <a href="#" class="feat-btn">users
             <span class="fas fa-caret-down first"></span>
           </a>
           <ul class="feat-show">
-<li><a href="#">Add Product</a></li>
-<li><a href="#">View Product</a></li>
+<li><a href="admin_user.php?type=shop">shops</a></li>
+<li><a href="admin_user.php?type=customer">customers</a></li>
 </ul>
 </li>
 <li>
-          <a href="#" class="serv-btn">Payment
-            <span class="fas fa-caret-down second"></span>
-          </a>
-          <ul class="serv-show">
-<li><a href="#">Pending Payments</a></li>
-<li><a href="#">Payment Report</a></li>
-</ul>
+  <a href="#" class="serv-btn">Feedback
+    <span class="fas fa-caret-down second"></span>
+  </a>
+  <ul class="serv-show">
+    <li><a href="feedback_list.php">list</a></li>
+    <li><a href="feedback_analysis.php">analysis</a></li>
+  </ul>
 </li>
-<li><a href="#">Inventory Management</a></li>
-<li><a href="#">Todays Booking</a></li>
-<li><a href="#">Sales Report</a></li>
-<li><a href="#">Feedback</a></li>
 </ul>
 </nav>';}
 
