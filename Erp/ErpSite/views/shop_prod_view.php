@@ -10,8 +10,6 @@
 
     $prod_id = $_GET['product_id'];
     $shop_id = $_GET['shop_id'];
-    // echo $prod_id;
-    // echo $shop_id;
     $prod = $conn->query("select * from inventory where prod_id='{$prod_id}' AND shop_id='{$shop_id}' ");
     $row = $prod->fetch_assoc();
     $prod_view = $conn->query("select * from products where product_id='{$_GET['product_id']}'");
@@ -29,7 +27,6 @@
         $conn->query("insert into cart(customer_id,shop_id,prod_id,qty) values('{$cust_id}', '{$shop_id}', '{$prod_id}','{$qty}') ");
         echo '<script>alert("product added to cart")</script>';
         $_SESSION['cart'] = $_SESSION['cart']+1;}
-        // echo $qty;
         }
     }
 
@@ -68,12 +65,6 @@
 
            <div class="caption">
              <div class="row buttons">
-
-                 <!-- <button class="btn  col-sm-4 col-sm-offset-2 btn-lg add-cart" style="background-color:#ff9f00; color:#fff;font-size:1em;">ADD TO CART</button> -->
-
-
-
-               <!-- <button class="btn col-sm-4 col-sm-offset-1 btn-lg" style="background-color:#fb641b; color:#fff;font-size:1em;"><i class="fa fa-bolt" style="font-size:1.2em;"></i> BUY NOW</button> -->
                </div>
                <br><br>
                  <div class="cart-form">

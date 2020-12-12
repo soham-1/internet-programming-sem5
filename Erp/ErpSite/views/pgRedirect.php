@@ -8,7 +8,6 @@ $payment_method = "Paytm";
 
 $balance = 0;
 $cart_items = $conn->query("select * from cart where customer_id='{$cust_id}'  ");
-// select i.price, p.image, p.name, c.qty from inventory i inner join cart c on i.prod_id=c.prod_id inner join products p on p.product_id=i.prod_id where i.shop_id=
 while ($row=$cart_items->fetch_assoc()) {
     $sql3 = "select i.price, p.image, p.name, c.qty,p.product_id from cart c inner join products p on c.prod_id=p.product_id inner join inventory i on i.prod_id=p.product_id where c.shop_id='{$row['shop_id']}'";
 	$res = $conn->query($sql3);
@@ -48,14 +47,6 @@ $paramList["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
 $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
-
-/*
-$paramList["CALLBACK_URL"] = "http://localhost/PaytmKit/pgResponse.php";
-$paramList["MSISDN"] = $MSISDN; //Mobile number of customer
-$paramList["EMAIL"] = $EMAIL; //Email ID of customer
-$paramList["VERIFIED_BY"] = "EMAIL"; //
-$paramList["IS_USER_VERIFIED"] = "YES"; //
-*/
 
 //Here checksum string will return by getChecksumFromArray() function.
 $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
