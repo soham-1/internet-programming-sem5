@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result2 = mysqli_query($conn,$sql2);
     $avail_qty = $conn->query("select qty from inventory where shop_id=$shop_id and prod_id='{$row['product_id']}'")->fetch_assoc();
     $updated_qty = (int)$avail_qty['qty']-(int)$row['qty'];
-    $conn->query("update inventory set qty=$updated_qty where shop_id=$shop_id");
+    $conn->query("update inventory set qty=$updated_qty where shop_id=$shop_id and prod_id='{$row['product_id']}'");
   }
   $conn->query("delete from cart where customer_id=$cust_id");
   $_SESSION['cart'] = 0;

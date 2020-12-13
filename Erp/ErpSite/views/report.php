@@ -20,45 +20,31 @@
             // gets the category and price of sold items for a particular shops
             $sql = "select i.price, p.category, pd.qty from payments py inner join payment_details pd on py.payment_id=pd.payment_id inner join products p on pd.prod_id=p.product_id inner join inventory i on p.product_id=i.prod_id where py.shop_id='{$shop_id}'";
             if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
-                $sql .= " and py.pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}' group by p.category";
+                $sql .= " and py.pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}' order by p.category";
                 $result = $conn->query($sql);
             } else {
-                $sql .= "group by p.category";
+                $sql .= "order by p.category";
                 $result = $conn->query($sql);
             }
-            $category_price = 0;
-            $new_category = true;
-            // while($row=$result->fetch_assoc()) {
-            //     if ($new_category) {
-            //         $initial_category=$row["category"];
-            //         $new_category = false;
-            //     }
-            //     if ($initial_category==$row["category"]){
-            //         $category_price += ((int)$row["price"] * (int)$row['qty']);
-            //     } else {
-            //         array_push($dataPoints, array("y"=>($category_price), "label" => $row["category"]));
-            //         $category_price = 0;
-            //         $new_category = true;
-            //     }
-            // }
-            $i=0; $j=-1;
+            $i=0; $cat_price=0;
+            $row = $result->fetch_assoc();
+            $prev_category = $row['category'];
             while ($i<$result->num_rows) {
-                if($i>$j) {
-                    $row=$result->fetch_assoc();
-                }
-                if ($new_category) {
-                    $initial_category=$row["category"];
-                    $new_category = false;
-                }
-                if ($initial_category==$row["category"]){
-                    $category_price += ((int)$row["price"] * (int)$row['qty']);
-                    $i++; $j++;
+                if ($prev_category == $row['category']) {
+                    $cat_price += ((int)$row["price"] * (int)$row['qty']);
                 } else {
-                    array_push($dataPoints, array("y"=>($category_price), "label" => $row["category"]));
-                    $category_price = 0;
-                    $new_category = true;
-                    $i--;
+                    array_push($dataPoints, array("y"=>($cat_price), "label" => $prev_category));
+                    $cat_price=0;
+                    $prev_category = $row['category'];
+                    continue;
                 }
+                $row = $result->fetch_assoc();
+                if ($row == null) {
+                    array_push($dataPoints, array("y"=>($cat_price), "label" => $prev_category));
+                    break;
+                }
+                $row["price"];
+                $i++;
             }
         }
     }
