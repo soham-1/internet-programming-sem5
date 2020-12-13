@@ -5,6 +5,7 @@
     $showerror = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if ($_POST['new_product']!="") {
+      $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' limit 1")->fetch_row()[0];
       $product = $_POST['new_product'];
       $res = $conn->query("select name from products where name='{$_POST['new_product']}' limit 1");
       if ($res->num_rows>0) {
@@ -13,9 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "<script>alert('image required while entering a new product')</script>";
       } else if ($_POST['category']=="") {
         echo "<script>alert('category required while entering a new product')</script>";
+      } else if (is_numeric($_POST['price'])==false || is_numeric($_POST['discount'])==false || (int)$_POST['price']<0 || (int)$_POST['discount']<0 || $_POST['qty']<=0) {
+        echo "<script>alert('wrong details !')</script>";
       } else {
         $imgData = addslashes(file_get_contents($_FILES['prod_image']['tmp_name']));
         $conn->query("insert into products(name,category,image) values('{$_POST['new_product']}', '{$_POST['category']}', '{$imgData}')");
+        $prod_id = $conn->query("select * from products where name='{$_POST['new_product']}' limit 1")->fetch_assoc()['product_id'];
+        $conn->query("insert into inventory(shop_id, prod_id, qty, discount, description, price) values('{$shop_id}', '{$prod_id}', '{$_POST['qty']}', '{$_POST['discount']}', '{$_POST['description']}', '{$_POST['price']}')");
         echo '<script>alert("product added")</script>';
       }
     } else {
@@ -24,15 +29,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       $description = $_POST['description'];
       $price = $_POST['price'];
       $discount = $_POST['discount'];
-  
-      $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' limit 1")->fetch_row()[0];
-      $res = $conn->query("select prod_id from inventory where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
-      if ($res->num_rows > 0) {
-        $conn->query("update inventory set price='{$price}', description='{$description}', qty='{$qty}', discount='{$discount}' where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
-        echo '<script>alert("product updated")</script>';
+      if (is_numeric($_POST['price'])==false || is_numeric($_POST['discount'])==false || (int)$_POST['price']<0 || (int)$_POST['discount']<0 || $_POST['qty']<=0) {
+        echo "<script>alert('wrong details !')</script>";
       } else {
-        $conn->query("insert into inventory(shop_id, prod_id, price, discount, qty, description) values('{$shop_id}', '{$prod_id}', '{$price}', '{$discount}', '{$qty}', '{$description}') ");
-        echo '<script>alert("product added")</script>';
+        $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' limit 1")->fetch_row()[0];
+        $res = $conn->query("select prod_id from inventory where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
+        if ($res->num_rows > 0) {
+          $conn->query("update inventory set price='{$price}', description='{$description}', qty='{$qty}', discount='{$discount}' where shop_id='{$shop_id}' and prod_id='{$prod_id}' limit 1");
+          echo '<script>alert("product updated")</script>';
+        } else {
+          $conn->query("insert into inventory(shop_id, prod_id, price, discount, qty, description) values('{$shop_id}', '{$prod_id}', '{$price}', '{$discount}', '{$qty}', '{$description}') ");
+          echo '<script>alert("product added")</script>';
+        }
       }
     }
     
