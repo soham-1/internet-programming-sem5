@@ -70,7 +70,7 @@
                  <div class="cart-form">
                  <form action="shop_prod_view.php?product_id=<?php echo $prod_id; ?>&shop_id=<?php echo $shop_id; ?>" method="post" id="qty_form">
                  qty
-                 <input type="text" name="qty" id="qty" value="0" max="<?php echo $row['qty']; ?>" >
+                 <input type="number" name="qty" id="qty" value="0" max="<?php echo $row['qty']; ?>" >
                  <button class="bsbtn btn-primary" type="submit" id="cart" >ADD TO CART</buton>
 </form>
 </div>
