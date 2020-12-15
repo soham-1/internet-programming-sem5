@@ -17,7 +17,7 @@
     // SELECT * FROM products
     // WHERE product_id IN
     // (SELECT MIN(product_id) FROM products GROUP BY category)");
-    $products = $conn->query("select * from products");
+    $products = $conn->query("select * from products order by category");
 
     $clothes = $conn->query("select * from products where category='clothes' ");
     $daily_items = $conn->query("select * from products where category='daily' ");

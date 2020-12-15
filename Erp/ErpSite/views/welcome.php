@@ -114,7 +114,7 @@
     </button>
     <div class="dropdown-content">
       <a href="profile.php"><i class="fas fa-user-circle"></i>My Profile</a>
-      <a href="#"><i class="fas fa-cog"></i>Settings</a>
+      <a href="chnge_pwd.php"><i class="fas fa-cog"></i>Settings</a>
       <br>
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
@@ -165,7 +165,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
     </button>
     <div class="dropdown-content">
       <a href="cust_profile.php"><i class="fas fa-user-circle"></i>My Profile</a>
-      <a href="#"><i class="fas fa-cog"></i>Settings</a>
+      <a href="chnge_pwd.php"><i class="fas fa-cog"></i>Settings</a>
       <br>
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
