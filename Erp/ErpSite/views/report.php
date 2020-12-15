@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<?php 
+<?php
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';
@@ -94,12 +94,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		text: title
 	},
 	data: [{
-		type: diagram, //change type to bar, line, area, pie, etc  
+		type: diagram, //change type to bar, line, area, pie, etc
 		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();
- 
+
 }
 </script>
 
