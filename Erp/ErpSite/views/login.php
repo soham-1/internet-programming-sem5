@@ -37,7 +37,7 @@ $exists = false;
                 $_SESSION['group_name'] = $name;
                 $_SESSION['cart'] = $num2;
 
-                header("location: welcome_content.php");
+                header("location: alt_home.php");
               }
               else{
                 $showerror = "Invalid Credentials ";
