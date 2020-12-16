@@ -30,11 +30,11 @@
     $items =  $conn->query("select * from payments where payment_id={$payment_id}");
     $row=$items->fetch_assoc();
     $sql5 = "SELECT * from shop WHERE shop_id='{$row['shop_id']}'";
-$result5 = mysqli_query($conn, $sql5);
-$id3 = mysqli_fetch_assoc($result5);
-$sql6 = "SELECT * from address WHERE user_id='{$id3['shop_owner']}'";
-$result6 = mysqli_query($conn, $sql6);
-$address = mysqli_fetch_assoc($result6);
+    $result5 = mysqli_query($conn, $sql5);
+    $id3 = mysqli_fetch_assoc($result5);
+    $sql6 = "SELECT * from address WHERE user_id='{$id3['shop_owner']}'";
+    $result6 = mysqli_query($conn, $sql6);
+    $address = mysqli_fetch_assoc($result6);
     require 'php mailer/PHPMailerAutoload.php';
     $mail = new PHPMailer;
     $mail->isSMTP();
