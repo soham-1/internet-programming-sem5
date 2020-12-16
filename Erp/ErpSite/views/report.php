@@ -11,7 +11,7 @@
             if (isset($_GET['start_date']) && isset($_GET['end_date'])) {
                 $result = $conn->query("SELECT amount, pay_date FROM payments where shop_id='{$shop_id}' and pay_date>='{$_GET['start_date']}' and pay_date<='{$_GET['end_date']}' ORDER BY pay_date");
             } else {
-                $result = $conn->query("SELECT amount, pay_date FROM payments where shop_id='{$shop_id}' ORDER BY pay_date");
+                $result = $conn->query("SELECT SUM(amount) as amount, pay_date FROM payments where shop_id='{$shop_id}' GROUP BY pay_date ORDER BY pay_date");
             }
             while($row=$result->fetch_assoc()) {
                 array_push($dataPoints, array("y"=> $row["amount"], "label" => $row["pay_date"]));
