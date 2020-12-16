@@ -253,8 +253,8 @@ else{
             <span class="fas fa-caret-down first"></span>
           </a>
           <ul class="feat-show">
-<li><a href="admin_user.php?type=shop">shops</a></li>
-<li><a href="admin_user.php?type=customer">customers</a></li>
+<li><a href="admin_user.php?type=shop">Shops</a></li>
+<li><a href="admin_user.php?type=customer">Customers</a></li>
 </ul>
 </li>
 <li>
@@ -262,8 +262,8 @@ else{
     <span class="fas fa-caret-down second"></span>
   </a>
   <ul class="serv-show">
-    <li><a href="feedback_list.php">list</a></li>
-    <li><a href="feedback_analysis.php">analysis</a></li>
+    <li><a href="feedback_list.php">List</a></li>
+    <li><a href="feedback_analysis.php">nalysis</a></li>
   </ul>
 </li>
 </ul>
