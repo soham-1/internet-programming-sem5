@@ -119,7 +119,7 @@
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
-  <a href="welcome_content.php">Shop</a>
+  <a href="alt_home.php">Shop</a>
   </div>
 
 </div>
@@ -128,7 +128,7 @@
       <span class="fas fa-bars" style="margin-left: 0px;"></span>
     </div>
 <nav class="sidebar">
-<a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
+<a href="alt_home.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li><a href="add_inventory.php">Add Product</a></li>
 <li>
@@ -158,7 +158,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
 
   <div class="topnav">
   <div class="topnav-right">
-    <a href="welcome_content.php">home</a>
+    <a href="alt_home.php">home</a>
     <div class="dropdown">
     <button class="dropbtn"><i class="fas fa-user"></i>
       <i class="fa fa-caret-down"></i>
@@ -178,7 +178,7 @@ elseif(implode($_SESSION['group_name'])=='customer'){
       <span class="fas fa-bars"></span>
     </div>
 <nav class="sidebar">
-<a href="welcome_content.php"><div class="text">LOCCO ERP</div></a>
+<a href="alt_home.php"><div class="text">LOCCO ERP</div></a>
 <ul>
 <li class="active"><a href="my_orders.php">My Orders</a></li>
 
@@ -213,7 +213,7 @@ else{
       <a href="logout.php"><i class="fas fa-power-off"></i>Logout</a>
     </div>
   </div>
-  <a href="welcome_content.php">Admin info</a>
+  <a href="alt_home.php">Admin info</a>
   </div>
 </div>
 
