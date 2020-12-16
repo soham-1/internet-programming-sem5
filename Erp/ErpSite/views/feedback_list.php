@@ -33,12 +33,12 @@
                         if ($feedbacks->num_rows>0) {
                             while ($row=$feedbacks->fetch_assoc()) {
                                 echo '<tr>
-                                <form method="post">
-                                    <td>'.$row["first_name"] .' '. $row["last_name"] .' <input type="hidden" value="'. $row['user_id'] .'" name="user_id"></td>
+                                
+                                    <td>'.$row["first_name"] .' '. $row["last_name"]  .'</td>
                                     <td>'.$row["recovery_email"].'</td>
                                     <td>'.$row["ratings"].'</td>
                                     <td>'.$row["message"].'</td>
-                                </form>
+                                
                                     </tr>';
                             }
                         } else {
