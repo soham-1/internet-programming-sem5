@@ -17,7 +17,13 @@
     // SELECT * FROM products
     // WHERE product_id IN
     // (SELECT MIN(product_id) FROM products GROUP BY category)");
-    $products = $conn->query("select * from products");
+    $products = $conn->query("select * from products order by category");
+    $category_list = $conn->query("select distinct category from products");
+    $category_array = array();
+    while($row=$category_list->fetch_assoc()) {
+        $all_prod = $conn->query("select * from products where category='{$row['category']}' limit 4");
+        array_push($category_array, array("label" => $row['category'], "mysqli_res" => $all_prod));
+    }
 
     $clothes = $conn->query("select * from products where category='clothes' ");
     $daily_items = $conn->query("select * from products where category='daily' ");
@@ -101,58 +107,35 @@
               <button class="next" >next</button>
     </div><br>
 
-    <a href="category_list.php?category=clothes" id="category-title"><h2>clothes</h2></a>
-    <div class="row col-lg-8 col-md-4 col-sm-11" id="category">
-        <?php
-        while($row=$clothes->fetch_assoc()) {
-            if (isset($row['image'])) {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-11 id="clothes">
-                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
-                        <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
-                    </a>
-                        <div class="text-container">
-                        <h4><b>'. $row['name'] .'</b></h4>
-                    </div>
-                </div>';
-            } else {
-                echo '<div class="card col-lg-2 col-md-4 col-sm-11">
-                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
-                        <img src="css/defaultC.png" alt="Avatar" style="width:100%">
-                    </a>
-                        <div class="text-container">
-                        <h4><b>'. $row['name'] .'</b></h4>
-                    </div>
-                </div>';
-            }
-        }
-        ?>
-    </div>
-    <a href="category_list.php?category=daily" id="category-title"><h2>daily items</h2></a>
-    <div class="row" id="category">
-        <?php
-        while($row=$daily_items->fetch_assoc()) {
-            if (isset($row['image'])) {
-            echo '<div class="card col-lg-2 col-md-4 col-sm-12">
-                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
-                        <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
-                    </a>
-                    <div class="text-container">
-                        <h4><b>'. $row['name'] .'</b></h4>
-                    </div>
-                </div>';
-            } else {
+    <?php 
+        for ($i=0; $i<count($category_array); $i++) {
+            $category = $category_array[$i]['mysqli_res'];
+            echo '<a href="category_list.php?category='.$category_array[$i]['label'].'" id="category-title"><h2>'.$category_array[$i]['label'] .'</h2></a>
+            <div class="row col-lg-8 col-md-4 col-sm-11" id="category">';
+            while($row=$category->fetch_assoc()) {
+                if (isset($row['image'])) {
                 echo '<div class="card col-lg-2 col-md-4 col-sm-12">
-                    <a href="shop_list.php?product_id='. $row['product_id'] . '">
-                        <img src="css/defaultC.png" alt="Avatar" style="width:100%">
-                    </a>
-                    <div class="text-container">
-                        <h4><b>'. $row['name'] .'</b></h4>
-                    </div>
-                </div>';
+                        <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                            <img src="data:image/png;charset=utf8;base64,' . base64_encode($row['image']) . '" alt="image not available" style="width:100%">
+                        </a>
+                        <div class="text-container">
+                            <h4><b>'. $row['name'] .'</b></h4>
+                        </div>
+                    </div>';
+                } else {
+                    echo '<div class="card col-lg-2 col-md-4 col-sm-12">
+                        <a href="shop_list.php?product_id='. $row['product_id'] . '">
+                            <img src="css/defaultC.png" alt="Avatar" style="width:100%">
+                        </a>
+                        <div class="text-container">
+                            <h4><b>'. $row['name'] .'</b></h4>
+                        </div>
+                    </div>';
+                }
             }
+            echo '</div>';
         }
-        ?>
-    </div>
+    ?>
 </div>
 </body>
 <script>

@@ -140,7 +140,7 @@
 <li><a href="payments.php?user=shop">All Payments</a></li>
 </ul>
 </li>
-<li><a href="inventory.php">Inventory Management</a></li>
+<li><a href="inventory.php">Inventory</a></li>
 <li>
   <a href="#" class="serv-btn">Sales Report
     <span class="fas fa-caret-down second"></span>

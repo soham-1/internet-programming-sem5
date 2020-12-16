@@ -16,22 +16,25 @@
 
 <?php
 $shop_id = $conn->query("select shop_id from shop where shop_owner='{$_SESSION['user_id']}' ")->fetch_row();
-$products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' ");
 
-if (count($_GET)>0) {
-    if (is_numeric($_GET['qty']) && is_numeric($_GET['discount']) && $_GET['discount']>=0 && $_GET['qty']>=0){
-        $conn->query("update inventory set description='{$_GET['description']}', qty='{$_GET['qty']}', discount='{$_GET['discount']}', price='{$_GET['price']}' where shop_id='{$shop_id[0]}' and prod_id='{$_GET['product_id']}' ");
+if (count($_POST)>0) {
+    if (isset($_POST['remove'])) {
+        $conn->query("delete from inventory where prod_id='{$_POST['product_id']}' and shop_id='{$shop_id[0]}' ");
+    }
+    if (is_numeric($_POST['qty']) && is_numeric($_POST['discount']) && $_POST['discount']>=0 && $_POST['qty']>=0){
+        $conn->query("update inventory set description='{$_POST['description']}', qty='{$_POST['qty']}', discount='{$_POST['discount']}', price='{$_POST['price']}' where shop_id='{$shop_id[0]}' and prod_id='{$_POST['product_id']}' ");
     } else {
         echo '<script> alert("wrong inputs") </script>';
     }
 
 }
+$products = $conn->query("select * from inventory where shop_id='{$shop_id[0]}' ");
 ?>
 
 <body>
 <div class="outer-container">
 
-    <div class="container col-lg-10 col-md-10 col-sm-12">
+    <div class="container col-lg-11 col-md-12 col-sm-12">
     <table id="table_id" class="display">
         <thead>
             <tr>
@@ -42,6 +45,7 @@ if (count($_GET)>0) {
                 <th>Qty</th>
                 <th>Discount</th>
                 <th>Actions</th>
+                <th>Remove</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +56,7 @@ if (count($_GET)>0) {
                     $product_id = $row['prod_id'];
                     $product_name = $conn->query("select name, category from products where product_id='{$product_id}' limit 1")->fetch_row();
                     echo '<tr id="'. $product_id .'">
-                            <form action="inventory.php" method="get" id="'. $product_id .'form">
+                            <form action="inventory.php" method="post" id="'. $product_id .'form">
                             <td>'. $product_name[0] .' <br><input type="text" name="product_id" value="'. $product_id .'" style="visibility:hidden"> </td>
                             <td>'. $row['description'] .' <br> <input type="text" value="'. $row['description'] .'" name="description" id="'. $product_id .'description" style="visibility:hidden"></td>
                             <td>'. $product_name[1] .'</td>
@@ -60,6 +64,7 @@ if (count($_GET)>0) {
                             <td>'. $row['qty'] .' <br> <input type="text" value="'. $row['qty'] .'" name="qty" id="'. $product_id .'qty" style="visibility:hidden"></td>
                             <td>'. $row['discount'] .' <br> <input type="text" value="'. $row['discount'] .'" name="discount" id="'. $product_id .'discount" style="visibility:hidden"></td>
                             <td> <span id="'. $product_id .'" class="edit-button"><i class="fas fa-edit"></i> Edit</span> <span class="cancel-button" style="visibility:hidden" id="'. $product_id .'cancel"><i class="fas fa-times"></i> Cancel</span> <br> <button class="bsbtn btn-primary" id="'. $product_id .'save" style="visibility:hidden">save</buton></td>
+                            <td><button type="submit" class="bsbtn btn-outline-pink" name="remove" value="remove">remove item</button></td>
                             </form>
                         </tr>';
                     $count += 1;
@@ -84,12 +89,9 @@ if (count($_GET)>0) {
 </body>
 <script>
     $(document).ready( function () {
-        $('#table_id').DataTable( {
-    responsive: true
-} );
-$(window).resize(function () {
-            $("table.dataTable").resize();
-});
+        $('#table_id').DataTable({
+            responsive: true
+        });
 
         $('.edit-button').click(function() {
             var id = this.id;
@@ -107,7 +109,9 @@ $(window).resize(function () {
             document.getElementById(cancel).style.visibility = "visible";
         });
         $('.cancel-button').click(function() {
-            var id = this.id[0];
+            // var id = this.id[0];
+            var id = this.id.match(/\d/g);
+            id = id.join("");
             var desc = id + "description";
             var qty = id + "qty";
             var price = id + "price";
@@ -121,24 +125,24 @@ $(window).resize(function () {
             document.getElementById(save).style.visibility = "hidden";
             document.getElementById(cancel).style.visibility = "hidden";
         });
-        $('.bsbtn').click(function () {
-            var id = this.id[0];
-            var form = id + "form";
-            var inputs = document.getElementById(form);
-            var values = {};
-            for (i=0; i<inputs.length; i++) {
-                values[inputs[i].name] = inputs[i].value;
-            }
-            $.ajax({
-                type: 'get',
-                url: 'inventory.php',
-                data: values,
-                success: function (response) {
-                // alert('updated successfully !');
-                $(form).html(response);
-                }
-            });
-        });
+        // $('.bsbtn').click(function () {
+        //     var id = this.id[0];
+        //     var form = id + "form";
+        //     var inputs = document.getElementById(form);
+        //     var values = {};
+        //     for (i=0; i<inputs.length; i++) {
+        //         values[inputs[i].name] = inputs[i].value;
+        //     }
+        //     $.ajax({
+        //         type: 'get',
+        //         url: 'inventory.php',
+        //         data: values,
+        //         success: function (response) {
+        //         // alert('updated successfully !');
+        //         $(form).html(response);
+        //         }
+        //     });
+        // });
     });
 </script>
 </html>
