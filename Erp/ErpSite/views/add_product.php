@@ -87,9 +87,9 @@ $sql = "INSERT INTO `products` (`name`, `category`, `image`,`price`,`Description
             </div>
 
 
-    <div class="field btns">
+
               <button type=submit class="submit" >Submit</button>
-            </div>
+           
 
 </form>
 </div>
