@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<?php 
+<?php
     require 'includeCDN.php';
     require 'welcome.php';
     require '../models/connDB.php';
@@ -14,8 +14,7 @@
 <?php
     if (count($_POST)>0) {
       if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $conn->query("insert into feedback(user_id, first_name, last_name, recovery_email, ratings, message) values('{$_SESSION['user_id']}','{$_POST['first_name']}','{$_POST['last_name']}','{$_POST['email']}','{$_POST['rating']}','{$_POST['message']}') ");
-        print_r($conn);
+        $conn->query("insert into feedback (user_id, first_name, last_name, recovery_email, ratings, message) values('{$_SESSION['user_id']}','{$_POST['first_name']}','{$_POST['last_name']}','{$_POST['email']}','{$_POST['rating']}','{$_POST['message']}') ");
         echo '<script>alert("thanks for the feedback")</script>';
       } else {
         echo '<script>alert("wrong email")</script>';
@@ -58,13 +57,13 @@
 </div>
 <div class="form-row">
           <div class="input-data textarea">
-            <textarea rows="8" cols="80" name="message" required></textarea> 
+            <textarea rows="8" cols="80" name="message" required></textarea>
             <br />
 <div class="underline">
 </div>
 <label for="">Write your message</label>
-          
-        
+
+
         <br />
 <div class="form-row submit-btn">
           <div class="input-data">
