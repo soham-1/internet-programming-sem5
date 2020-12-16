@@ -263,7 +263,7 @@ else{
   </a>
   <ul class="serv-show">
     <li><a href="feedback_list.php">List</a></li>
-    <li><a href="feedback_analysis.php">nalysis</a></li>
+    <li><a href="feedback_analysis.php">analysis</a></li>
   </ul>
 </li>
 </ul>

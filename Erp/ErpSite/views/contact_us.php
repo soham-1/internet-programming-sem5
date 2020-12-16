@@ -15,6 +15,7 @@
     if (count($_POST)>0) {
       if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $conn->query("insert into feedback(user_id, first_name, last_name, recovery_email, ratings, message) values('{$_SESSION['user_id']}','{$_POST['first_name']}','{$_POST['last_name']}','{$_POST['email']}','{$_POST['rating']}','{$_POST['message']}') ");
+        print_r($conn);
         echo '<script>alert("thanks for the feedback")</script>';
       } else {
         echo '<script>alert("wrong email")</script>';
