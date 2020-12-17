@@ -9,25 +9,8 @@
 $cust_id = $_SESSION['user_id'];
 
 $cart_items = $conn->query("select * from payments where cust_id='{$cust_id}'  ");
-$pay_details = array();
-$payment = array();
+$orders = $conn->query("select py.payment_id, p.name, py.pay_date, py.shop_id, py.amount, py.payment_method, s.shop_name from payments py inner join payment_details pd on py.payment_id=pd.payment_id inner join products p on pd.prod_id=p.product_id inner join shop s on s.shop_id=py.shop_id where py.cust_id='{$cust_id}'");
 
-while ($row=$cart_items->fetch_assoc()) {
-$sql3 = "select * from payment_details where payment_id='{$row['payment_id']}'";
-array_push($pay_details,$conn->query($sql3)->fetch_row());
-array_push($payment,$row);
-$shop_id = $row['shop_id'];
-
-}
-
-
-
-$sql5 = "SELECT * from shop WHERE shop_id='{$shop_id}'";
-$result5 = mysqli_query($conn, $sql5);
-$id3 = mysqli_fetch_assoc($result5);
-$sql6 = "SELECT * from address WHERE user_id='{$id3['shop_owner']}'";
-$result6 = mysqli_query($conn, $sql6);
-$address = mysqli_fetch_assoc($result6);
 ?>
 
 <head>
@@ -55,7 +38,7 @@ $address = mysqli_fetch_assoc($result6);
         <thead>
             <tr>
                 <th>Order id</th>
-                <th>Shop id</th>
+                <th>Shop</th>
                 <th>Order Date</th>
                 <th>Total Amount</th>
                 <th>Mode</th>
@@ -64,14 +47,14 @@ $address = mysqli_fetch_assoc($result6);
         </thead>
         <tbody>
         <?php
-            for ($i=0; $i< count($payment); $i++) {
+            while ($row=$orders->fetch_assoc()) {
                 echo '<tr>
-                <td>' . $payment[$i]['payment_id'] .'</td>
-                <td>' . $payment[$i]['shop_id'] .'</td>
-                <td>' . $payment[$i]['pay_date'] .'</td>
-                <td>' . $payment[$i]['amount'] .'</td>
-                <td>'. $payment[$i]['payment_method'] .'</td>
-                <td>11</td>
+                <td>' . $row['payment_id'] .'</td>
+                <td>' . $row['shop_name'] .'</td>
+                <td>' . $row['pay_date'] .'</td>
+                <td>' . $row['amount'] .'</td>
+                <td>'. $row['payment_method'] .'</td>
+                <td>'. $row['name'] .'</td>
                 </tr>';
             }
             ?>
