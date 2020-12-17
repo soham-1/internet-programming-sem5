@@ -43,12 +43,13 @@
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
 
-    $mail->Username = 'yadavhemant1716@gmail.com';
+    $mail->Username = 'sohampatkar94@gmail.com';
     $mail->Password = '';
+    $receiver_email = $_POST['email'];
 
-    $mail->setFrom('yadavhemant1716@gmail.com');
-    $mail->addAddress('2018.hemantkumar.yadav@ves.ac.in');
-    $mail->addReplyTo('yadavhemant1716@gmail.com');
+    $mail->setFrom('sohampatkar94@gmail.com');
+    $mail->addAddress('sohampatkar99@gmail.com');
+    $mail->addReplyTo('sohampatkar94@gmail.com');
     $mail->isHTML(true);
     $mail->Subject='Payment reminder';
     $mail->Body='<h3>Your payment of '.$row['balance'].' for date '.$row['pay_date'].' is pending.</h3> <p>
@@ -100,13 +101,17 @@
         <tbody>
         <?php
             while ($row = $pending->fetch_assoc()) {
-                if ($_GET['user']=="shop")
+                if ($_GET['user']=="shop") {
                     $name = $conn->query("select username from user where user_id={$row['cust_id']}")->fetch_row()[0];
-                else
+                    $email = $conn->query("select email from user where user_id={$row['cust_id']}")->fetch_assoc()['email'];
+                }
+                else {
                     $name = $conn->query("select shop_name from shop where shop_id={$row['shop_id']}")->fetch_row()[0];
+                    $email = $conn->query("select email from user where user_id={$row['shop_id']}")->fetch_assoc()['email'];
+                }
                 echo '<tr> <form method="post">
                 <td>' . $name .' <input type="hidden" name="payment_id" value="'. $row['payment_id'] .'"></td>
-                <td>' . $row['pay_date'] .'</td>
+                <td>' . $row['pay_date'] .' <input type="hidden" name="email" value="'. $email .'"></td>
                 <td>' . $row['amount'] .'</td>
                 <td>' . $row['balance'] .'</td>';
                 if ($_GET['user']=="shop") {
