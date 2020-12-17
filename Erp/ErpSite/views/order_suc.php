@@ -73,7 +73,7 @@ Shop Category:<strong> <?php echo$id3['category'] ?></strong>
 Shop Address:<strong>
 <?php echo $address['blg'], $address['lane'], $address['landmark'], $address['city'], $address['pincode'];
 
-echo'<img src="data:image/png;charset=utf8;base64,' . base64_encode($id3['picture']) . '" class="rounded-img" />' ?>
+echo'<img style="width:40%;" src="data:image/png;charset=utf8;base64,' . base64_encode($id3['picture']) . '" class="rounded-img" />' ?>
 </strong>
     </p>
 
