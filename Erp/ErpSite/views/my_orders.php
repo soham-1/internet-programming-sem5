@@ -69,7 +69,9 @@ $orders = $conn->query("select py.payment_id, p.name, py.pay_date, py.shop_id, p
 </body>
 <script>
     $(document).ready( function () {
-        $('#table_id').DataTable();
+        $('#table_id').DataTable({
+            responsive:true
+        });
     } );
 </script>
 
