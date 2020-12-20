@@ -1,5 +1,5 @@
 <?php
-
+/* page not used */
 require 'connDB.php';
 
 function register($username, $password, $email, $group) {

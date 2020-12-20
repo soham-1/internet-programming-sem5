@@ -43,13 +43,13 @@
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
 
-    $mail->Username = 'sohampatkar94@gmail.com';
-    $mail->Password = '';
+    $mail->Username = 'sohampatkar93@gmail.com';
+    $mail->Password = 'shinchan1';
     $receiver_email = $_POST['email'];
 
-    $mail->setFrom('sohampatkar94@gmail.com');
-    $mail->addAddress('sohampatkar99@gmail.com');
-    $mail->addReplyTo('sohampatkar94@gmail.com');
+    $mail->setFrom('sohampatkar93@gmail.com');
+    $mail->addAddress('sohampatkar1990@gmail.com');
+    $mail->addReplyTo('sohampatkar93@gmail.com');
     $mail->isHTML(true);
     $mail->Subject='Payment reminder';
     $mail->Body='<h3>Your payment of '.$row['balance'].' for date '.$row['pay_date'].' is pending.</h3> <p>
