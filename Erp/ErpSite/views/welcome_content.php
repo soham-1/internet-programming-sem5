@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- not used  -->
 <?php
     require 'includeCDN.php';
     require 'welcome.php';

@@ -303,14 +303,6 @@ $email; $picture; $address; $phone_no; $shop;
                         <label for="category" class="detail-field">pincode</label>
                         <input type="text" class="detail-field values" id="pincode" name="pincode" value="<?php echo $address[5]; ?>" required >
                     </div>
-                    <!-- <div class="row">
-                        <label for="category" class="detail-field">Latitude</label>
-                        <input type="text" class="detail-field values" id="pincode" name="lat" value="<?php echo $address[6]; ?>">
-                    </div>
-                    <div class="row">
-                        <label for="category" class="detail-field">Longitude</label>
-                        <input type="text" class="detail-field values" id="pincode" name="long" value="<?php echo $address[7]; ?>">
-                    </div> -->
                 </div>
                 <button class="bsbtn btn-success" id="form-btn" type="submit">save</button>
             </form>

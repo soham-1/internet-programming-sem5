@@ -1,5 +1,5 @@
 <?php
-
+/* page not used */
 require 'connDB.php';
 
 function get_user($username, $password) {

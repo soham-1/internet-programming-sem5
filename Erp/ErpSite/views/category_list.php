@@ -17,7 +17,6 @@
 <?php
     $products = $conn->query("select * from products where category='{$_GET['category']}' ")->fetch_all();
     $qty_array = array();
-    // $shop_names = array();
     for ($i=0; $i<count($products); $i++) {
         $count = 0;
         $count += $conn->query("select count(shop_id) from inventory where prod_id='{$products[$i][0]}'")->fetch_row()[0];

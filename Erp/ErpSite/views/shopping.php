@@ -32,7 +32,6 @@
 <body>
 <div class="outer-container">
     <div class="row col-lg-6 col-md-4 col-sm-11" id="popular">
-    <!-- <i class="fas fa-angle-left angle"></i> -->
     <button class="prev" disabled>prev</button>
     <?php
     while($row=$products->fetch_assoc()) {
@@ -103,7 +102,6 @@
                     <p>dummy values</p>
                 </div>
               </div>
-              <!-- <span class="angle"><i class="fas fa-angle-right"></i></span> -->
               <button class="next" >next</button>
     </div><br>
 
@@ -166,9 +164,6 @@
         if (count<=0)
             this.disabled = true ;
         for (i=0; i<element.length; i++) {
-            // element[i].addClass ("translate-backward");
-            // element[i].style.transition = "all 3s";
-            // element[i].style.transform = "translateX(-100%)";
         }
     });
 
@@ -178,9 +173,6 @@
         if (count>=(num_slides-1))
             this.disabled = true ;
         for (i=0; i<element.length; i++) {
-            // element[i].addClass ("translate-forward");
-            // element[i].style.transition = "all 3s";
-            // element[i].style.transform = "translateX(100%)";
         }
     });
 
