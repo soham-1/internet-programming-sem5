@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/contact_us.css">

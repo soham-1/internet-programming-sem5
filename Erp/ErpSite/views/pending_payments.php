@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
     require 'welcome.php';
     require '../models/connDB.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="css/common.css">

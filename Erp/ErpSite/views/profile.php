@@ -1,3 +1,5 @@
+<?php require 'welcome.php'; ?>
+<?php include('../models/connDB.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- profile page for shops -->
@@ -13,8 +15,6 @@
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <?php require 'welcome.php'; ?>
-    <?php include('../models/connDB.php'); ?>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/profile.css">
     <title>ERP</title>

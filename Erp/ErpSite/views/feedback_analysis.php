@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
 <?php 
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
     $dataPoints = array();
     $feedbacks = $conn->query("select * from feedback");
@@ -35,6 +33,8 @@
     array_push($dataPoints, array("y"=> $positive, "label" => "positive"));
     array_push($dataPoints, array("y"=> $negative, "label" => "negative"));
 ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/contact_us.css">

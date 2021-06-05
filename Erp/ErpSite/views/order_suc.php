@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -38,6 +35,8 @@ $sql6 = "SELECT * from address WHERE user_id='{$id3['shop_owner']}'";
 $result6 = mysqli_query($conn, $sql6);
 $address = mysqli_fetch_assoc($result6);
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 <style type="text/css">

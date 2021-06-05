@@ -1,11 +1,12 @@
+<?php
+    require 'welcome.php';
+    require '../models/connDB.php';
+    require 'includeCDN.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-<?php
-    require 'includeCDN.php';
-    require 'welcome.php';
-    require '../models/connDB.php';
-?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>

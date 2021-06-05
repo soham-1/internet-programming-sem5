@@ -1,12 +1,11 @@
+<?php
+    require 'welcome.php';
+    require '../models/connDB.php';
+    require 'includeCDN.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- profile page for customer, same logic used as profile.php -->
-<?php 
-    require 'includeCDN.php';
-    require 'welcome.php';
-    require '../models/connDB.php';
-?>
-
 <head>   
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/profile.css">

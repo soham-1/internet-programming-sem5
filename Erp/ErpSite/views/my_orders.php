@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 
 $cust_id = $_SESSION['user_id'];
@@ -12,6 +9,8 @@ $cart_items = $conn->query("select * from payments where cust_id='{$cust_id}'  "
 $orders = $conn->query("select py.payment_id, p.name, py.pay_date, py.shop_id, py.amount, py.payment_method, s.shop_name from payments py inner join payment_details pd on py.payment_id=pd.payment_id inner join products p on pd.prod_id=p.product_id inner join shop s on s.shop_id=py.shop_id where py.cust_id='{$cust_id}'");
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 <style type="text/css">

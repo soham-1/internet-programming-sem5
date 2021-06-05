@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<!-- not used  -->
 <?php
-    require 'includeCDN.php';
-    require 'welcome.php';
     require '../models/connDB.php';
+    require 'welcome.php';
+    require 'includeCDN.php';
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/welcome_content.css">

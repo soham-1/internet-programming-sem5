@@ -1,6 +1,6 @@
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
     $showalert = false;
     $showerror = false;

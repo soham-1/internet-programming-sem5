@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 ?>
+
 <?php
 
     $prod_id = $_GET['product_id'];
@@ -31,6 +29,9 @@
     }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/shop_list.css">

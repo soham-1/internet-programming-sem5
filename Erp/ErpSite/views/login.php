@@ -1,9 +1,8 @@
 <?php
-//this is a DOMComment
 $login = false;
 $showerror = false;
 session_start();
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) header("location: welcome_content.php");
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) header("location: alt_home.php");
 else {
   session_unset();
   session_destroy();
@@ -19,7 +18,7 @@ $exists = false;
     $sql = "Select * from user where username='$username'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
-    if ($num ==1){
+    if ($num == 1){
             while($row=mysqli_fetch_assoc($result)){
               if(password_verify($password,$row['password'])){
                 $login = true;

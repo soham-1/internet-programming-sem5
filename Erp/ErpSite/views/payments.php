@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="css/common.css">
@@ -61,8 +60,8 @@
                 $details = $conn->query("select * from payment_details where payment_id={$row['payment_id']}");
                 while ($row1 = $details->fetch_assoc()) {
                     $prod_name = $conn->query("select * from products where product_id={$row1['prod_id']}")->fetch_row()[1];
-                    $price = $conn->query("select price from inventory where shop_id={$row['shop_id']} and prod_id={$row1['prod_id']}")->fetch_row()[0];
-                    $total_price = $price * $row1['qty'];
+                    $price = $conn->query("select price from inventory where shop_id={$row['shop_id']} and prod_id={$row1['prod_id']}")->fetch_row();
+                    $total_price = $price[0] * $row1['qty'];
                     echo '<tr>
                         <td>' . $name .'</td>
                         <td>' . $row['pay_date'] .'</td>

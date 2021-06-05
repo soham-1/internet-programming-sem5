@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
-    require 'includeCDN.php';
     require 'welcome.php';
+    require 'includeCDN.php';
     require '../models/connDB.php';
 
 $cust_id = $_SESSION['user_id'];
@@ -14,6 +11,8 @@ $id_s = mysqli_fetch_assoc($shop_id);
 $items = $conn->query("select * from payments where shop_id='{$cust_id}'  ");
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 <style type="text/css">

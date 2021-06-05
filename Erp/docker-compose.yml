@@ -1,0 +1,42 @@
+version: '3'
+services:
+    web:
+        build: .
+        container_name: php_app
+        depends_on:
+          - mysql
+        restart: always
+        volumes:
+          - ./ErpSite:/var/www/html/
+        ports:
+          - "8100:80"
+        stdin_open: true
+        tty: true
+        links:
+            - mysql:db
+
+    mysql:
+        container_name: mysql
+        image: mariadb:latest
+        restart: always
+        volumes:
+            - ./Database:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_PASSWORD: 'rootpswd'
+            MYSQL_USER: 'root'
+            MYSQL_PASSWORD: 'pswd'
+            MYSQL_DATABASE: 'ErpDb'
+        ports:
+            - "9906:3306"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - mysql:db
+        ports:
+            - "8082:80"
+        environment:
+            - PMA_USER=root
+            - PMA_PASSWORD=rootpswd
+            - PHP_UPLOAD_MAX_FILESIZE=100MB

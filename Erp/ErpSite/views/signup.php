@@ -1,7 +1,7 @@
 <?php
     require '_nav.php';
     require '../models/connDB.php';
-    ?>
+?>
 <?php
 $showalert = false;
 $showerror = false;
