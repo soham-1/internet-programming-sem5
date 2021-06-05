@@ -15,7 +15,7 @@ docker-compose up -d --build
 ```
 * access the site on [http://localhost:8100/views/](http://localhost:8100/views/)
 * access the phpmyadmin on [http://localhost:8082/](http://localhost:8082/)
-* in there import the erpdb.sql file in Erp/Database folder into ErpDb in phpmyadmn
+* import the erpdb.sql file in Erp/Database folder into ErpDb in phpmyadmn
 
 ### stop container
 ```sh
