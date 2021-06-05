@@ -8,7 +8,7 @@ This is a ERP website where users can either login as shopkeepers, customers or 
 git clone https://github.com/soham-1/internet-programming-sem5.git
 ```
 
-## Run on Docker
+## Run on Docker :whale2:
 ### build containers
 ```sh
 docker-compose up -d --build
